@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
+using GetStartedApp.Models;
 
 namespace GetStartedApp.ViewModels;
 
@@ -38,6 +39,19 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private void ButtonClicked()
     {
+        // WARN: crashuje przy pustym lub nieunikatowym inpucie
+        using (var context = new TimeTrackingContext())
+        {
+            var newUser = new User
+            {
+                Name = $"{Name}",
+                Password = $"{Greeting}",
+                Type = "admin",
+            };
+
+            context.Users.Add(newUser);
+            context.SaveChanges();
+        }
         Lines.Add(Greeting);
     }
 }
