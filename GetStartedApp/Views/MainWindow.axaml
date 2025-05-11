@@ -16,7 +16,7 @@
     </Design.DataContext>
 
   <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-    <TextBlock Text="TimeWise" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" Foreground="Black" Margin="0,0,0,16"/>
+    <TextBlock Text="TimeWise" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" Margin="0,0,0,16"/>
     <TextBox Watermark="Username" Text="{Binding Username, Mode=TwoWay}" Width="200" Margin="0,0,0,10"/>
     <TextBox Watermark="Password" Text="{Binding Password, Mode=TwoWay}" PasswordChar="*" Width="200" Margin="0,0,0,10" />
     <Button Command="{Binding ButtonClickedCommand}" HorizontalAlignment="Center">Login</Button>
