@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
@@ -28,13 +25,12 @@ public partial class MainWindowViewModel : ViewModelBase
         LoginButtonClickedCommand = new RelayCommand(LoginButtonClicked);
     }
 
-    public ObservableCollection<string> Lines { get; } = [];
-
     public ICommand LoginButtonClickedCommand { get; }
 
     private void LoginButtonClicked()
     {
         using var context = new TimeTrackingContext();
+
         var user = new User
         {
             Name = $"{Username}",
