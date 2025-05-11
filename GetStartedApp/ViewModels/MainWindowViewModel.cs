@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using GetStartedApp.Models;
@@ -9,6 +10,16 @@ public partial class MainWindowViewModel : ViewModelBase
 {
     private const string DEFAULT_GREETING = "Hello World from Avalonia.Samples";
 
+    public string Username
+    {
+        get => field;
+        set => SetProperty(ref field, value);
+    }
+    public string Password
+    {
+        get => field;
+        set => SetProperty(ref field, value);
+    }
     public MainWindowViewModel()
     {
         ButtonClickedCommand = new RelayCommand(ButtonClicked);
