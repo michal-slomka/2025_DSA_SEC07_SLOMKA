@@ -10,16 +10,15 @@
         Title="GetStartedApp">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-  <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-    <TextBlock Text="TimeWise" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" Margin="0,0,0,16"/>
-    <TextBox Watermark="Username" Text="{Binding Username, Mode=TwoWay}" Width="200" Margin="0,0,0,10"/>
-    <TextBox Watermark="Password" Text="{Binding Password, Mode=TwoWay}" PasswordChar="*" Width="200" Margin="0,0,0,10" />
-    <Button Command="{Binding LoginButtonClickedCommand}" HorizontalAlignment="Center">Login</Button>
-    <ListBox ItemsSource="{Binding Lines}" Width="300"/>
-  </StackPanel>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="TimeWise" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" Margin="0,0,0,16"/>
+        <TextBox Watermark="Username" Text="{Binding Username, Mode=TwoWay}" Width="200" Margin="0,0,0,10"/>
+        <TextBox Watermark="Password" Text="{Binding Password, Mode=TwoWay}" PasswordChar="*" Width="200" Margin="0,0,0,10" />
+        <Button Command="{Binding LoginButtonClickedCommand}" HorizontalAlignment="Center" Content="Login"/>
+        <Button Command="{Binding NavigateToSecondViewCommand}" HorizontalAlignment="Center" Content="Przejdź do drugiego widoku" Margin="0,10,0,0"/>
+        <ListBox ItemsSource="{Binding Lines}" Width="300"/>
+    </StackPanel>
 </Window>
