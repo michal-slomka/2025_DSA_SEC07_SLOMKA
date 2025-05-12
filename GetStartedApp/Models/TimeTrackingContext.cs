@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
 
 namespace GetStartedApp.Models;
@@ -30,8 +31,17 @@ public partial class TimeTrackingContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySQL("server=localhost;user=root;password=admin;database=time_tracking;");
+    {
+        // fuck this shit
+        var workingDirectory = Environment.CurrentDirectory;
+        var projectDirectory = Directory.GetParent(workingDirectory)!.Parent!.Parent!.FullName;
+        using var reader = new StreamReader($"{projectDirectory}/constring.txt");
+
+        // server=localhost;user=root;password=root;database=time_tracking;
+        var conString = reader.ReadToEnd().Trim();
+
+        optionsBuilder.UseMySQL(conString);
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
