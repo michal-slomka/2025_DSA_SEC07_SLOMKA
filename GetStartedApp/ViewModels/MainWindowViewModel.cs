@@ -1,81 +1,34 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
-using GetStartedApp.Models;
 
 namespace GetStartedApp.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public string Username
-    {
-        get => field;
-        set => SetProperty(ref field, value);
-    } = "";
-
-    public string Password
-    {
-        get => field;
-        set => SetProperty(ref field, value);
-    } = "";
-
-    public ObservableCollection<string> Lines { get; } = [];
-
-    public ICommand LoginButtonClickedCommand { get; }
-    public ICommand NavigateToSecondViewCommand { get; }
-
     public MainWindowViewModel()
     {
-        LoginButtonClickedCommand = new RelayCommand(LoginButtonClicked);
-        NavigateToSecondViewCommand = new RelayCommand(OpenSecondView);
+        var loginViewModel = new LoginViewModel();
+        loginViewModel.LoginSucceeded += OnLoginSucceeded;
+        CurrentPage = loginViewModel;
+
+        NavigateToLoginCommand = new RelayCommand(NavigateToLogin);
     }
 
-    private void LoginButtonClicked()
+    public ViewModelBase CurrentPage
     {
-        using var context = new TimeTrackingContext();
-        var user = new User
-        {
-            Name = $"{Username}",
-            Password = $"{Password}",
-            Type = "admin",
-        };
-
-        var matchingUsers =
-            from u in context.Users
-            where u.Name == user.Name && u.Password == user.Password
-            select u;
-
-        if (matchingUsers.Count() == 1)
-        {
-            Console.WriteLine("Logged in");
-            OpenSecondView();
-        }
-        else
-        {
-            Console.WriteLine("Incorrect email or password");
-        }
+        get;
+        private set { SetProperty(ref field, value); }
     }
 
-    private void OpenSecondView()
-{
-    if (App.Current.ApplicationLifetime is Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime lifetime)
+    public ICommand NavigateToLoginCommand { get; }
+
+    private void NavigateToLogin()
     {
-        var currentWindow = lifetime.Windows.FirstOrDefault(w => w.IsActive);
-
-        var secondView = new Views.SecondView
-        {
-            DataContext = new SecondViewModel()
-        };
-        secondView.Show();
-
-        currentWindow?.Close();
+        CurrentPage = new LoginViewModel();
     }
-}
 
-
-    private string field = "";
+    private void OnLoginSucceeded(string username, string password)
+    {
+        CurrentPage = new SecondViewModel(username, password);
+    }
 }
