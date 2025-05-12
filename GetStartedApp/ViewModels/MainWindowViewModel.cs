@@ -1,55 +1,34 @@
-﻿using System;
-using System.Linq;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
-using GetStartedApp.Models;
 
 namespace GetStartedApp.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public string Username
-    {
-        get => field;
-        set => SetProperty(ref field, value);
-    } = "";
-
-    public string Password
-    {
-        get => field;
-        set => SetProperty(ref field, value);
-    } = "";
-
     public MainWindowViewModel()
     {
-        LoginButtonClickedCommand = new RelayCommand(LoginButtonClicked);
+        var loginViewModel = new LoginViewModel();
+        loginViewModel.LoginSucceeded += OnLoginSucceeded;
+        CurrentPage = loginViewModel;
+
+        NavigateToLoginCommand = new RelayCommand(NavigateToLogin);
     }
 
-    public ICommand LoginButtonClickedCommand { get; }
-
-    private void LoginButtonClicked()
+    public ViewModelBase CurrentPage
     {
-        using var context = new TimeTrackingContext();
+        get;
+        private set { SetProperty(ref field, value); }
+    }
 
-        var user = new User
-        {
-            Name = $"{Username}",
-            Password = $"{Password}",
-            Type = "admin",
-        };
+    public ICommand NavigateToLoginCommand { get; }
 
-        var matchingUsers =
-            from u in context.Users
-            where u.Name == user.Name && u.Password == user.Password
-            select u;
+    private void NavigateToLogin()
+    {
+        CurrentPage = new LoginViewModel();
+    }
 
-        if (matchingUsers.Count() == 1)
-        {
-            Console.WriteLine("Logged in");
-        }
-        else
-        {
-            Console.WriteLine("Incorrect email or password");
-        }
+    private void OnLoginSucceeded(string username, string password)
+    {
+        CurrentPage = new SecondViewModel(username, password);
     }
 }
