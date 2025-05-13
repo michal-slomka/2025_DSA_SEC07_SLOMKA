@@ -16,4 +16,9 @@ public partial class User
     public virtual ICollection<Project> Projects { get; set; } = new List<Project>();
 
     public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
+
+    public override string ToString()
+    {
+        return $"UserId: {UserId}, Name: {Name}, Password: {Password}, Type: {Type}";
+    }
 }
