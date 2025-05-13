@@ -6,9 +6,9 @@ public class MainWindowViewModel : ViewModelBase
 {
     public MainWindowViewModel()
     {
-        var loginViewModel = new LoginViewModel();
-        loginViewModel.LoginSucceeded += OnLoginSucceeded;
-        CurrentPage = loginViewModel;
+        _loginView = new LoginViewModel();
+        _loginView.LoginSucceeded += OnLoginSucceeded;
+        CurrentPage = _loginView;
     }
 
     public ViewModelBase CurrentPage
@@ -17,13 +17,20 @@ public class MainWindowViewModel : ViewModelBase
         private set => SetProperty(ref field, value);
     }
 
+    private readonly LoginViewModel _loginView;
+
     private void OnLoginSucceeded(string username, string password, string type)
     {
         CurrentPage = type switch
         {
-            "admin" => new NewUserViewModel(),
+            "admin" => new NewUserViewModel(this),
             "employee" => new SecondViewModel(username, password),
             _ => throw new Exception()
         };
+    }
+
+    public void NavigateToLogin()
+    {
+        CurrentPage = _loginView;
     }
 }

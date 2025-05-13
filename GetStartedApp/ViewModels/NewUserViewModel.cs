@@ -8,8 +8,11 @@ namespace GetStartedApp.ViewModels;
 
 public class NewUserViewModel : ViewModelBase
 {
-    public NewUserViewModel()
+    private readonly MainWindowViewModel _mainWindowViewModel;
+
+    public NewUserViewModel(MainWindowViewModel mainWindowViewModel)
     {
+        _mainWindowViewModel = mainWindowViewModel;
         RegisterUserCommand = new RelayCommand(RegisterUser);
     }
 
@@ -62,5 +65,10 @@ public class NewUserViewModel : ViewModelBase
         context.SaveChanges();
 
         Console.WriteLine($"User registered");
+    }
+
+    public void NavigateToLogin()
+    {
+        _mainWindowViewModel.NavigateToLogin();
     }
 }

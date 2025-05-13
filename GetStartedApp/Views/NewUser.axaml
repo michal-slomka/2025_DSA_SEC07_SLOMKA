@@ -34,6 +34,7 @@
 
         <Button Content="Register" Width="100" Command="{Binding RegisterUserCommand}" HorizontalAlignment="Center"
                 HorizontalContentAlignment="Center" />
+        <Button Content="Log out" Click="OnBackToLoginButtonClick" HorizontalAlignment="Center"/>
     </StackPanel>
 
 </UserControl>

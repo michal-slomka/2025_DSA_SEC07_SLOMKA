@@ -10,4 +10,10 @@ public partial class NewUserView : UserControl
     {
         InitializeComponent();
     }
+
+    private void OnBackToLoginButtonClick(object? sender, RoutedEventArgs e)
+    {
+        // Logic to navigate back to the Login view
+        (DataContext as dynamic)?.NavigateToLogin();
+    }
 }
