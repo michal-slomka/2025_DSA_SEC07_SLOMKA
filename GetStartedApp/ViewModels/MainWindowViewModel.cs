@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 
 namespace GetStartedApp.ViewModels;
@@ -10,8 +11,6 @@ public partial class MainWindowViewModel : ViewModelBase
         var loginViewModel = new LoginViewModel();
         loginViewModel.LoginSucceeded += OnLoginSucceeded;
         CurrentPage = loginViewModel;
-
-        NavigateToLoginCommand = new RelayCommand(NavigateToLogin);
     }
 
     public ViewModelBase CurrentPage
@@ -20,15 +19,20 @@ public partial class MainWindowViewModel : ViewModelBase
         private set { SetProperty(ref field, value); }
     }
 
-    public ICommand NavigateToLoginCommand { get; }
-
-    private void NavigateToLogin()
+    private void OnLoginSucceeded(string username, string password, string type)
     {
-        CurrentPage = new LoginViewModel();
-    }
+        if (type == "admin")
+        {
+            CurrentPage = new NewUserViewModel();
+        }
+        else if (type == "employee")
+        {
+            CurrentPage = new SecondViewModel(username, password);
+        }
+        else
+        {
+            throw new Exception();
+        }
 
-    private void OnLoginSucceeded(string username, string password)
-    {
-        CurrentPage = new SecondViewModel(username, password);
     }
 }

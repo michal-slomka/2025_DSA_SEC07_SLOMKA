@@ -14,7 +14,7 @@ public partial class LoginViewModel : ViewModelBase
         LoginButtonClickedCommand = new RelayCommand(LoginButtonClicked);
     }
 
-    public event Action<string, string>? LoginSucceeded;
+    public event Action<string, string, string>? LoginSucceeded;
 
     public string Username
     {
@@ -53,7 +53,7 @@ public partial class LoginViewModel : ViewModelBase
             var u = matchingUsers.First();
             Console.WriteLine($"Logged in as: {u}");
             Users.Add(u);
-            LoginSucceeded?.Invoke(Username, Password);
+            LoginSucceeded?.Invoke(u.Name, u.Password, u.Type);
         }
         else
         {
