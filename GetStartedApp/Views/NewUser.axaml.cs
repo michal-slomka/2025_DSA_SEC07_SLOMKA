@@ -1,6 +1,6 @@
-using System.Diagnostics;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using GetStartedApp.ViewModels;
 
 namespace GetStartedApp.Views;
 
@@ -13,7 +13,6 @@ public partial class NewUserView : UserControl
 
     private void OnBackToLoginButtonClick(object? sender, RoutedEventArgs e)
     {
-        // Logic to navigate back to the Login view
-        (DataContext as dynamic)?.NavigateToLogin();
+        (DataContext as NewUserViewModel)?.NavigateToLogin();
     }
 }

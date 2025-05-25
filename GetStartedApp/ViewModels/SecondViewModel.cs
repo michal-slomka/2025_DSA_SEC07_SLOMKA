@@ -1,13 +1,7 @@
 namespace GetStartedApp.ViewModels;
 
-public class SecondViewModel : ViewModelBase
+public class SecondViewModel(string username, string password) : ViewModelBase
 {
-    public SecondViewModel(string username, string password)
-    {
-        Username = $"Username: {username}";
-        Password = $"Password: {password}";
-    }
-
-    public string Username { get; }
-    public string Password { get; }
+    public string Username { get; } = $"Username: {username}";
+    public string Password { get; } = $"Password: {password}";
 }

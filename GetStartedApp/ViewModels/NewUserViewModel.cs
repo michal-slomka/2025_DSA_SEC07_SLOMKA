@@ -8,8 +8,6 @@ namespace GetStartedApp.ViewModels;
 
 public class NewUserViewModel : ViewModelBase
 {
-    private readonly MainWindowViewModel _mainWindowViewModel;
-
     public NewUserViewModel(MainWindowViewModel mainWindowViewModel)
     {
         _mainWindowViewModel = mainWindowViewModel;
@@ -35,6 +33,8 @@ public class NewUserViewModel : ViewModelBase
     } = "employee";
 
     public ICommand RegisterUserCommand { get; }
+
+    private readonly MainWindowViewModel _mainWindowViewModel;
 
     private void RegisterUser()
     {
