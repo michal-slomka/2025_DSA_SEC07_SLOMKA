@@ -1,5 +1,4 @@
 using System;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
@@ -28,8 +27,6 @@ public class LoginViewModel : ViewModelBase
         set => SetProperty(ref field, value);
     } = "";
 
-    public ObservableCollection<User> Users { get; } = [];
-
     public ICommand LoginButtonClickedCommand { get; }
 
     private void LoginButtonClicked()
@@ -52,7 +49,6 @@ public class LoginViewModel : ViewModelBase
         {
             var u = matchingUsers.First();
             Console.WriteLine($"Logged in as: {u}");
-            Users.Add(u);
             LoginSucceeded?.Invoke(u.Name, u.Password, u.Type);
         }
         else

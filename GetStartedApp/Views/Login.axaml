@@ -19,6 +19,5 @@
         <TextBox Watermark="Password" Text="{Binding Password, Mode=TwoWay}" PasswordChar="*" Width="200"
                  Margin="0,0,0,10" />
         <Button Command="{Binding LoginButtonClickedCommand}" HorizontalAlignment="Center">Login</Button>
-        <ListBox ItemsSource="{Binding Users}" Width="300" />
     </StackPanel>
 </UserControl>
