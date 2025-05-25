@@ -47,7 +47,7 @@ public class NewUserViewModel : ViewModelBase
         {
             Name = $"{Username}",
             Password = $"{Password}",
-            Type = "admin",
+            Type = UserType,
         };
 
         var userWithSameName = context.Users.SingleOrDefault(u => u.Name == newUser.Name);

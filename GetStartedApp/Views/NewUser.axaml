@@ -26,9 +26,9 @@
         <StackPanel Orientation="Horizontal" Spacing="10">
             <TextBlock Text="User Type:" Width="75" VerticalAlignment="Center" />
             <ComboBox Width="200" SelectedItem="{Binding UserType}">
-                <ComboBoxItem Content="employee" />
-                <ComboBoxItem Content="project_manager" />
-                <ComboBoxItem Content="admin" />
+                <x:String>employee</x:String>
+                <x:String>project_manager</x:String>
+                <x:String>admin</x:String>
             </ComboBox>
         </StackPanel>
 
