@@ -35,6 +35,12 @@ public partial class NewUserViewModel : ViewModelBase
 
     private void RegisterUser()
     {
+        if (Username == "" || Password == "")
+        {
+            Console.WriteLine($"Empty username or password. Cannot register user.");
+            return;
+        }
+
         using var context = new TimeTrackingContext();
 
         var newUser = new User
