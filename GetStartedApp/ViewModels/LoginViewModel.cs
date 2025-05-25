@@ -7,7 +7,7 @@ using GetStartedApp.Models;
 
 namespace GetStartedApp.ViewModels;
 
-public partial class LoginViewModel : ViewModelBase
+public class LoginViewModel : ViewModelBase
 {
     public LoginViewModel()
     {

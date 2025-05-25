@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace GetStartedApp.Models;
 
-namespace GetStartedApp.Models;
-
-public partial class Admin
+public class Admin
 {
     public int AdminId { get; set; }
 

@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace GetStartedApp.Models;
 
-public partial class TimeLog
+public class TimeLog
 {
     public int TimeLogId { get; set; }
 

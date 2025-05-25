@@ -1,6 +1,6 @@
 namespace GetStartedApp.ViewModels;
 
-public partial class SecondViewModel : ViewModelBase
+public class SecondViewModel : ViewModelBase
 {
     public SecondViewModel(string username, string password)
     {

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace GetStartedApp.Models;
 
-public partial class Project
+public class Project
 {
     public int ProjectId { get; set; }
 

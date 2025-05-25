@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
 
 namespace GetStartedApp.ViewModels;
 
-public partial class MainWindowViewModel : ViewModelBase
+public class MainWindowViewModel : ViewModelBase
 {
     public MainWindowViewModel()
     {
@@ -16,23 +14,16 @@ public partial class MainWindowViewModel : ViewModelBase
     public ViewModelBase CurrentPage
     {
         get;
-        private set { SetProperty(ref field, value); }
+        private set => SetProperty(ref field, value);
     }
 
     private void OnLoginSucceeded(string username, string password, string type)
     {
-        if (type == "admin")
+        CurrentPage = type switch
         {
-            CurrentPage = new NewUserViewModel();
-        }
-        else if (type == "employee")
-        {
-            CurrentPage = new SecondViewModel(username, password);
-        }
-        else
-        {
-            throw new Exception();
-        }
-
+            "admin" => new NewUserViewModel(),
+            "employee" => new SecondViewModel(username, password),
+            _ => throw new Exception()
+        };
     }
 }

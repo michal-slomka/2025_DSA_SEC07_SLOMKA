@@ -6,7 +6,7 @@ using GetStartedApp.Models;
 
 namespace GetStartedApp.ViewModels;
 
-public partial class NewUserViewModel : ViewModelBase
+public class NewUserViewModel : ViewModelBase
 {
     public NewUserViewModel()
     {

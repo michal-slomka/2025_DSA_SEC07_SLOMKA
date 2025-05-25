@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GetStartedApp.Models;
 
-public partial class Task
+public class Task
 {
     public int TaskId { get; set; }
 

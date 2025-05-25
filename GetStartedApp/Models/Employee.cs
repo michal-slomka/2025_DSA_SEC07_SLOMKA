@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace GetStartedApp.Models;
 
-namespace GetStartedApp.Models;
-
-public partial class Employee
+public class Employee
 {
     public int EmployeeId { get; set; }
 
