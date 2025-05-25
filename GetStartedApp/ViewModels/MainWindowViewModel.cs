@@ -29,7 +29,7 @@ public class MainWindowViewModel : ViewModelBase
         CurrentPage = type switch
         {
             "admin" => new NewUserViewModel(this),
-            "employee" => new SecondViewModel(username, password),
+            "employee" => new SecondViewModel(this, username, password),
             _ => throw new Exception()
         };
     }

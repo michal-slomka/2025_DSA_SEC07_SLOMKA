@@ -16,5 +16,6 @@
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBlock Text="{Binding Username}" />
         <TextBlock Text="{Binding Password}" />
+        <Button Content="Log out" Click="OnBackToLoginButtonClick" HorizontalAlignment="Center" />
     </StackPanel>
 </UserControl>
