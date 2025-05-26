@@ -6,71 +6,25 @@
   x:DataType="vm:CreateProjectViewModel"
   Background="#F9FAFB">
 
-  <StackPanel Margin="24" Spacing="16">
-
+  <StackPanel Margin="24" Spacing="16" HorizontalAlignment="Left">
     <TextBlock
       Text="Create Project"
       FontSize="28"
       FontWeight="Bold"
       Foreground="#111827" />
-
+    <!-- Name -->
     <TextBox
-      Watermark="Project Name"
-      Text="{Binding ProjectName, Mode=TwoWay}" />
-
+      Watermark="Name"
+      Text="{Binding Name}" />
+    <!-- Description -->
     <TextBox
       Watermark="Description"
-      Text="{Binding ProjectDescription, Mode=TwoWay}" />
-
-    <TextBlock
-      Text="Add Assignees"
-      FontWeight="SemiBold"
-      Margin="0,12,0,4" />
-
-    <!-- Single add-assignee row -->
-    <StackPanel Orientation="Horizontal" Spacing="8">
-      <TextBox
-        Width="200"
-        Watermark="Type a name"
-        Text="{Binding NewAssignee, Mode=TwoWay}" />
-      <Button
-        Content="Add"
-        Command="{Binding AddAssigneeCommand}" />
+      Text="{Binding Description}" />
+    <!-- Manager -->
+    <StackPanel Orientation="Horizontal">
+      <TextBlock Text="Manager" Margin="0,0,8,0" VerticalAlignment="Center"/>
+      <ComboBox ItemsSource="{Binding AvailableManagers}" SelectedItem="{Binding SelectedManager}" />
     </StackPanel>
-
-    <!-- Show all selected assignees -->
-    <ScrollViewer
-      Height="80"
-      VerticalScrollBarVisibility="Auto">
-      <ItemsControl
-        ItemsSource="{Binding AssignedUsers}">
-
-        <!-- Correct ItemsPanel -->
-        <ItemsControl.ItemsPanel>
-          <ItemsPanelTemplate>
-            <StackPanel Orientation="Horizontal" Spacing="8" />
-          </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-
-        <!-- ItemTemplate with DataType -->
-        <ItemsControl.ItemTemplate>
-          <DataTemplate x:DataType="x:String">
-            <Border
-              Background="#E5E7EB"
-              CornerRadius="4"
-              Padding="4,2"
-              Margin="0,4,4,0">
-              <TextBlock
-                Text="{Binding}"
-                FontSize="14"
-                Foreground="#374151" />
-            </Border>
-          </DataTemplate>
-        </ItemsControl.ItemTemplate>
-
-      </ItemsControl>
-    </ScrollViewer>
-
     <!-- Save / Cancel -->
     <StackPanel
       Orientation="Horizontal"
