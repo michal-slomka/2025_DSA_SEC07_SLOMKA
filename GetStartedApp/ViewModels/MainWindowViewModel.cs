@@ -10,17 +10,15 @@ namespace GetStartedApp.ViewModels;
 /// </summary>
 public partial class MainWindowViewModel : ViewModelBase
 {
-    [ObservableProperty]
-    private ViewModelBase currentPage;
+    [ObservableProperty] private ViewModelBase _currentPage;
 
     public ProjectsViewModel? ProjectsViewModel { get; set; }
 
     public MainWindowViewModel()
     {
-        // Initialize login and subscribe to login success event
-        var loginViewModel = new LoginViewModel();
-        loginViewModel.LoginSucceeded += OnLoginSucceeded;
-        CurrentPage = loginViewModel;
+        _loginView = new LoginViewModel();
+        _loginView.LoginSucceeded += OnLoginSucceeded;
+        CurrentPage = _loginView;
 
         // Initialize navigation commands
         ShowBoardCommand = new RelayCommand(ShowBoard);
@@ -38,10 +36,13 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand ShowTimeLogsCommand { get; }
     public ICommand ShowReportsCommand { get; }
     public ICommand LogOutCommand { get; }
+
+    private readonly LoginViewModel _loginView;
+
     // 🔹 Login success handler
     private void OnLoginSucceeded(string username, string password, string type)
     {
-        if (type == "admin" || type == "employee")
+        if (type is "admin" or "employee")
         {
             CurrentPage = new SecondViewModel(username, password, this);
         }
@@ -62,13 +63,12 @@ public partial class MainWindowViewModel : ViewModelBase
         CurrentPage = new TasksViewModel(this);
     }
 
-   private void ShowProjects()
-{
-    if (ProjectsViewModel is null)
-        ProjectsViewModel = new ProjectsViewModel(this);
-    
-    CurrentPage = ProjectsViewModel;
-}
+    private void ShowProjects()
+    {
+        ProjectsViewModel ??= new ProjectsViewModel(this);
+
+        CurrentPage = ProjectsViewModel;
+    }
 
 
     private void ShowTimeLogs()
@@ -80,10 +80,13 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         CurrentPage = new ReportsViewModel(this);
     }
+
+    public void NavigateToLogin()
+    {
+        CurrentPage = _loginView;
+    }
     private void LogOut()
     {
-        var loginViewModel = new LoginViewModel();
-        loginViewModel.LoginSucceeded += OnLoginSucceeded;
-        CurrentPage = loginViewModel;
+        NavigateToLogin();
     }
 }

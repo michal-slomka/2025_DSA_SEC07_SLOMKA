@@ -34,18 +34,18 @@ public partial class SecondViewModel : ViewModelBase
     {
         var toDoTasks = new ObservableCollection<TaskItem>
         {
-            new TaskItem { Title = "Design login screen", Description = "Mock the login UI" },
-            new TaskItem { Title = "Set up project", Description = "Initialize with Avalonia MVVM" }
+            new() { Title = "Design login screen", Description = "Mock the login UI" },
+            new() { Title = "Set up project", Description = "Initialize with Avalonia MVVM" }
         };
 
         var inProgressTasks = new ObservableCollection<TaskItem>
         {
-            new TaskItem { Title = "Implement board layout", Description = "Match Figma design" }
+            new() { Title = "Implement board layout", Description = "Match Figma design" }
         };
 
         var doneTasks = new ObservableCollection<TaskItem>
         {
-            new TaskItem { Title = "Mock login logic", Description = "admin/admin login implemented" }
+            new() { Title = "Mock login logic", Description = "admin/admin login implemented" }
         };
 
         Columns.Add(new TaskColumn
