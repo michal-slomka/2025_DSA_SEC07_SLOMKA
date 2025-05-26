@@ -1,5 +1,5 @@
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
+using System.Linq;
 using CommunityToolkit.Mvvm.Input;
 using GetStartedApp.Models;
 
@@ -7,7 +7,7 @@ namespace GetStartedApp.ViewModels
 {
     public partial class ProjectsViewModel : ViewModelBase
     {
-        public ObservableCollection<ProjectItem> Projects { get; } = new();
+        public ObservableCollection<ProjectItem> Projects { get; private set; } = [];
 
         public MainWindowViewModel Main { get; }
 
@@ -17,21 +17,19 @@ namespace GetStartedApp.ViewModels
         {
             Main = main;
             OpenCreateProjectCommand = new RelayCommand(OpenCreateProject);
-            LoadMockProjects();
+            LoadProjects();
         }
 
-        private void LoadMockProjects()
+        private void LoadProjects()
         {
-            Projects.Add(new ProjectItem {
-                Name = "Project Alpha",
-                Description = "Build Alpha features.",
-                AssignedUsers = new ObservableCollection<string> { "Alice", "Bob" }
-            });
-            Projects.Add(new ProjectItem {
-                Name = "Project Beta",
-                Description = "Test and deploy Beta.",
-                AssignedUsers = new ObservableCollection<string> { "Charlie" }
-            });
+            using var context = new TimeTrackingContext();
+
+            var projects = from p in context.Projects select p;
+
+            var projectItems = projects.Select(p => new ProjectItem
+                { Name = p.Name, Description = p.Description, AssignedUsers = new ObservableCollection<string>() });
+
+            Projects = new ObservableCollection<ProjectItem>(projectItems);
         }
 
         private void OpenCreateProject()
