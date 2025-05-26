@@ -22,7 +22,7 @@
       Text="{Binding Description}" />
     <!-- Manager -->
     <StackPanel Orientation="Horizontal">
-      <TextBlock Text="Manager" Margin="0,0,8,0" VerticalAlignment="Center"/>
+      <TextBlock Text="Manager" Margin="0,0,8,0" VerticalAlignment="Center" />
       <ComboBox ItemsSource="{Binding AvailableManagers}" SelectedItem="{Binding SelectedManager}" />
     </StackPanel>
     <!-- Save / Cancel -->

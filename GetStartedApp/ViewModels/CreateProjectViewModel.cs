@@ -47,7 +47,7 @@ public partial class CreateProjectViewModel : ViewModelBase
         {
             Name = Name,
             Description = Description,
-            ManagerId = manager.ProjectManagerId,
+            ManagerId = manager.ProjectManagerId
         };
         context.Projects.Add(project);
         context.SaveChanges();
