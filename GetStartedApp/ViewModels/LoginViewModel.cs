@@ -1,59 +1,46 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GetStartedApp.Models;
 
 namespace GetStartedApp.ViewModels;
 
-public class LoginViewModel : ViewModelBase
+public partial class LoginViewModel : ViewModelBase
 {
-    public LoginViewModel()
-    {
-        LoginButtonClickedCommand = new RelayCommand(LoginButtonClicked);
-    }
-
     public event Action<string, string, string>? LoginSucceeded;
 
-    public string Username
-    {
-        get;
-        set => SetProperty(ref field, value);
-    } = "";
+    [ObservableProperty]
+    private string username = string.Empty;
 
-    public string Password
-    {
-        get;
-        set => SetProperty(ref field, value);
-    } = "";
+    [ObservableProperty]
+    private string password = string.Empty;
 
-    public ICommand LoginButtonClickedCommand { get; }
+    public ObservableCollection<User> Users { get; } = new();
 
-    private void LoginButtonClicked()
+    [RelayCommand]
+    private void Login()
     {
         using var context = new TimeTrackingContext();
 
-        var user = new User
-        {
-            Name = $"{Username}",
-            Password = $"{Password}",
-            Type = "admin",
-        };
+        // Szukamy użytkownika w bazie danych
+        var matchingUser = context.Users
+            .FirstOrDefault(u => u.Name == Username && u.Password == Password);
 
-        var matchingUsers =
-            from u in context.Users
-            where u.Name == user.Name && u.Password == user.Password
-            select u;
-
-        if (matchingUsers.Count() == 1)
+        if (matchingUser != null)
         {
-            var u = matchingUsers.First();
-            Console.WriteLine($"Logged in as: {u}");
-            LoginSucceeded?.Invoke(u.Name, u.Password, u.Type);
+            Console.WriteLine($"✅ Zalogowano jako: {matchingUser.Name}");
+
+            // Dodajemy użytkownika do kolekcji (opcjonalnie)
+            if (!Users.Any(u => u.Name == matchingUser.Name))
+                Users.Add(matchingUser);
+
+            LoginSucceeded?.Invoke(matchingUser.Name, matchingUser.Password, matchingUser.Type);
         }
         else
         {
-            Console.WriteLine("Incorrect email or password");
+            Console.WriteLine("❌ Nieprawidłowy login lub hasło");
         }
     }
 }

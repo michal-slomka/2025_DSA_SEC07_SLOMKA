@@ -1,14 +1,38 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="GetStartedApp.App"
+             xmlns:vm="using:GetStartedApp.ViewModels"
+             xmlns:views="using:GetStartedApp.Views"
              xmlns:local="using:GetStartedApp"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+             x:Class="GetStartedApp.App"
+             RequestedThemeVariant="Light">
 
+    <!-- 🔁 ViewModel to View mappings -->
     <Application.DataTemplates>
-        <local:ViewLocator/>
+        <DataTemplate DataType="vm:LoginViewModel">
+            <views:LoginView />
+        </DataTemplate>
+        <DataTemplate DataType="vm:SecondViewModel">
+            <views:SecondView />
+        </DataTemplate>
+        <DataTemplate DataType="vm:TasksViewModel">
+            <views:TasksView />
+        </DataTemplate>
+        <DataTemplate DataType="vm:ProjectsViewModel">
+            <views:ProjectsView />
+        </DataTemplate>
+        <DataTemplate DataType="vm:TimeLogsViewModel">
+            <views:TimeLogsView />
+        </DataTemplate>
+        <DataTemplate DataType="vm:ReportsViewModel">
+            <views:ReportsView />
+        </DataTemplate>
+        <DataTemplate DataType="vm:CreateProjectViewModel">
+            <views:CreateProjectView />
+        </DataTemplate>
+
     </Application.DataTemplates>
-  
+
+    <!-- 🎨 Global styling -->
     <Application.Styles>
         <FluentTheme />
     </Application.Styles>

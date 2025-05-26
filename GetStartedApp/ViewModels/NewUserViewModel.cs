@@ -6,11 +6,10 @@ using GetStartedApp.Models;
 
 namespace GetStartedApp.ViewModels;
 
-public class NewUserViewModel : ViewModelBase
+public partial class NewUserViewModel : ViewModelBase
 {
-    public NewUserViewModel(MainWindowViewModel mainWindowViewModel)
+    public NewUserViewModel()
     {
-        _mainWindowViewModel = mainWindowViewModel;
         RegisterUserCommand = new RelayCommand(RegisterUser);
     }
 
@@ -34,23 +33,15 @@ public class NewUserViewModel : ViewModelBase
 
     public ICommand RegisterUserCommand { get; }
 
-    private readonly MainWindowViewModel _mainWindowViewModel;
-
     private void RegisterUser()
     {
-        if (Username == "" || Password == "")
-        {
-            Console.WriteLine($"Empty username or password. Cannot register user.");
-            return;
-        }
-
         using var context = new TimeTrackingContext();
 
         var newUser = new User
         {
             Name = $"{Username}",
             Password = $"{Password}",
-            Type = UserType,
+            Type = "admin",
         };
 
         var userWithSameName = context.Users.SingleOrDefault(u => u.Name == newUser.Name);
@@ -65,10 +56,5 @@ public class NewUserViewModel : ViewModelBase
         context.SaveChanges();
 
         Console.WriteLine($"User registered");
-    }
-
-    public void NavigateToLogin()
-    {
-        _mainWindowViewModel.NavigateToLogin();
     }
 }
