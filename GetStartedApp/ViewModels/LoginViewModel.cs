@@ -32,10 +32,6 @@ public partial class LoginViewModel : ViewModelBase
             return;
         }
         
-        Console.WriteLine($" Logged in as: {matchingUser.Name}");
-
         LoginSucceeded?.Invoke(matchingUser.Name, matchingUser.Password, matchingUser.Type, matchingUser.UserId);
-        
-
     }
 }
