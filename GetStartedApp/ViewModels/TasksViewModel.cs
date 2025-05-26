@@ -6,7 +6,7 @@ namespace GetStartedApp.ViewModels
 {
     public class TasksViewModel : ViewModelBase
     {
-        public ObservableCollection<TaskItem> Tasks { get; private set; } = new();
+        public ObservableCollection<TaskItem> Tasks { get; private set; } = [];
 
         public MainWindowViewModel Main { get; }
 
@@ -21,7 +21,7 @@ namespace GetStartedApp.ViewModels
             using var context = new TimeTrackingContext();
 
             // Filter tasks for the current user
-            int currentUserId = Main.CurrentUserId;
+            var currentUserId = Main.CurrentUserId;
 
             var taskItems = context.Tasks
                 .Where(t => t.AssignedEmployeeId == currentUserId)
@@ -29,12 +29,11 @@ namespace GetStartedApp.ViewModels
                 {
                     Title = t.Name,
                     Description = t.Description,
-                    Deadline = t.EndTime.HasValue? t.EndTime.Value.ToString("dd/MM/yyyy HH:mm:ss"): "No deadline",
+                    Deadline = t.EndTime.HasValue ? t.EndTime.Value.ToString("dd/MM/yyyy HH:mm:ss") : "No deadline",
                     Project = "",
                     TimeSpent = "",
-                    
-                    AssignedTo = t.AssignedEmployee != null ? t.AssignedEmployee.Name : "Unassigned",
-                }).ToList();
+                    AssignedTo = t.AssignedEmployee.Name,
+                });
 
             Tasks = new ObservableCollection<TaskItem>(taskItems);
         }
