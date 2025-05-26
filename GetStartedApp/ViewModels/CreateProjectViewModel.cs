@@ -60,8 +60,8 @@ namespace GetStartedApp.ViewModels
             };
 
             // 3) Drop it into the master list and go back
-            main.ProjectsViewModel ??= new ProjectsViewModel(main);
-            main.ProjectsViewModel.Projects.Add(p);
+            main.ProjectsView ??= new ProjectsViewModel(main);
+            main.ProjectsView.Projects.Add(p);
 
             // 4) Clear out the form for next time
             ProjectName        = string.Empty;
@@ -69,12 +69,12 @@ namespace GetStartedApp.ViewModels
             AssignedUsers.Clear();
             NewAssignee        = string.Empty;
 
-            main.CurrentPage = main.ProjectsViewModel;
+            main.CurrentPage = main.ProjectsView;
         }
 
         private void GoBack()
         {
-            main.CurrentPage = main.ProjectsViewModel!;
+            main.CurrentPage = main.ProjectsView!;
         }
     }
 }

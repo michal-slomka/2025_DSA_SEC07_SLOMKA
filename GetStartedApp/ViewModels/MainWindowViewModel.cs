@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -10,36 +9,18 @@ namespace GetStartedApp.ViewModels;
 /// </summary>
 public partial class MainWindowViewModel : ViewModelBase
 {
-    [ObservableProperty] private ViewModelBase _currentPage;
-
-    public ProjectsViewModel? ProjectsViewModel { get; set; }
-
     public MainWindowViewModel()
     {
-        _loginView = new LoginViewModel();
         _loginView.LoginSucceeded += OnLoginSucceeded;
         CurrentPage = _loginView;
-
-        // Initialize navigation commands
-        ShowBoardCommand = new RelayCommand(ShowBoard);
-        ShowTasksCommand = new RelayCommand(ShowTasks);
-        ShowProjectsCommand = new RelayCommand(ShowProjects);
-        ShowTimeLogsCommand = new RelayCommand(ShowTimeLogs);
-        ShowReportsCommand = new RelayCommand(ShowReports);
-        LogOutCommand = new RelayCommand(LogOut);
     }
+    
+    [ObservableProperty] private ViewModelBase _currentPage;
 
-    // 🔹 Public navigation commands
-    public ICommand ShowBoardCommand { get; }
-    public ICommand ShowTasksCommand { get; }
-    public ICommand ShowProjectsCommand { get; }
-    public ICommand ShowTimeLogsCommand { get; }
-    public ICommand ShowReportsCommand { get; }
-    public ICommand LogOutCommand { get; }
+    public ProjectsViewModel? ProjectsView { get; set; }
 
-    private readonly LoginViewModel _loginView;
+    private readonly LoginViewModel _loginView = new();
 
-    // 🔹 Login success handler
     private void OnLoginSucceeded(string username, string password, string type)
     {
         if (type is "admin" or "employee")
@@ -48,45 +29,46 @@ public partial class MainWindowViewModel : ViewModelBase
         }
         else
         {
-            Console.WriteLine("❌ Unknown user type");
+            Console.WriteLine("Unknown user type");
         }
     }
 
-    // 🔹 Navigation methods
+    // Navigation methods
+    [RelayCommand]
+    private void LogOut()
+    {
+        CurrentPage = _loginView;
+    }
+    
+    [RelayCommand]
     private void ShowBoard()
     {
         CurrentPage = new SecondViewModel("admin", "admin", this);
     }
 
+    [RelayCommand]
+    private void ShowProjects()
+    {
+        ProjectsView ??= new ProjectsViewModel(this);
+
+        CurrentPage = ProjectsView;
+    }
+    
+    [RelayCommand]
     private void ShowTasks()
     {
         CurrentPage = new TasksViewModel(this);
     }
 
-    private void ShowProjects()
-    {
-        ProjectsViewModel ??= new ProjectsViewModel(this);
-
-        CurrentPage = ProjectsViewModel;
-    }
-
-
+    [RelayCommand]
     private void ShowTimeLogs()
     {
         CurrentPage = new TimeLogsViewModel(this);
     }
 
+    [RelayCommand]
     private void ShowReports()
     {
         CurrentPage = new ReportsViewModel(this);
-    }
-
-    public void NavigateToLogin()
-    {
-        CurrentPage = _loginView;
-    }
-    private void LogOut()
-    {
-        NavigateToLogin();
     }
 }
