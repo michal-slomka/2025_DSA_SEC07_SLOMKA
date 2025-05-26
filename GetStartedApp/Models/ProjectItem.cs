@@ -6,6 +6,7 @@ namespace GetStartedApp.Models
     {
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public ObservableCollection<string> AssignedUsers { get; set; } = new();
+        public string Manager { get; set; } = string.Empty;
+        public ObservableCollection<string> AssignedUsers { get; set; } = [];
     }
 }

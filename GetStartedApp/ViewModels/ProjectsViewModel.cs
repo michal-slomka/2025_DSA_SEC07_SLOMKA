@@ -27,7 +27,17 @@ namespace GetStartedApp.ViewModels
             var projects = from p in context.Projects select p;
 
             var projectItems = projects.Select(p => new ProjectItem
-                { Name = p.Name, Description = p.Description, AssignedUsers = new ObservableCollection<string>() });
+            {
+                Name = p.Name,
+                Manager = $"Manager: {p.Manager.Name}",
+                Description = p.Description,
+                AssignedUsers =
+                    new ObservableCollection<string>(
+                        p.Tasks.AsEnumerable()
+                            .Select(t => t.AssignedEmployee.Name)
+                            .Distinct()
+                    )
+            });
 
             Projects = new ObservableCollection<ProjectItem>(projectItems);
         }
