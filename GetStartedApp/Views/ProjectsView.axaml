@@ -39,6 +39,7 @@
         <Button Content="← Log Out"
                 Background="Transparent"
                 Foreground="#EF4444"
+                Command="{Binding Main.LogOutCommand}"
                 Margin="0,40,0,0"/>
       </StackPanel>
     </Border>

@@ -28,6 +28,7 @@ public partial class MainWindowViewModel : ViewModelBase
         ShowProjectsCommand = new RelayCommand(ShowProjects);
         ShowTimeLogsCommand = new RelayCommand(ShowTimeLogs);
         ShowReportsCommand = new RelayCommand(ShowReports);
+        LogOutCommand = new RelayCommand(LogOut);
     }
 
     // 🔹 Public navigation commands
@@ -36,7 +37,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand ShowProjectsCommand { get; }
     public ICommand ShowTimeLogsCommand { get; }
     public ICommand ShowReportsCommand { get; }
-
+    public ICommand LogOutCommand { get; }
     // 🔹 Login success handler
     private void OnLoginSucceeded(string username, string password, string type)
     {
@@ -78,5 +79,11 @@ public partial class MainWindowViewModel : ViewModelBase
     private void ShowReports()
     {
         CurrentPage = new ReportsViewModel(this);
+    }
+    private void LogOut()
+    {
+        var loginViewModel = new LoginViewModel();
+        loginViewModel.LoginSucceeded += OnLoginSucceeded;
+        CurrentPage = loginViewModel;
     }
 }
