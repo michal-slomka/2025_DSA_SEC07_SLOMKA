@@ -12,35 +12,27 @@ public partial class LoginViewModel : ViewModelBase
     public event Action<string, string, string>? LoginSucceeded;
 
     [ObservableProperty]
-    private string username = string.Empty;
+    private string _username = string.Empty;
 
     [ObservableProperty]
-    private string password = string.Empty;
-
-    public ObservableCollection<User> Users { get; } = new();
+    private string _password = string.Empty;
 
     [RelayCommand]
     private void Login()
     {
         using var context = new TimeTrackingContext();
 
-        // Szukamy użytkownika w bazie danych
         var matchingUser = context.Users
             .FirstOrDefault(u => u.Name == Username && u.Password == Password);
 
-        if (matchingUser != null)
+        if (matchingUser == null)
         {
-            Console.WriteLine($"✅ Zalogowano jako: {matchingUser.Name}");
-
-            // Dodajemy użytkownika do kolekcji (opcjonalnie)
-            if (!Users.Any(u => u.Name == matchingUser.Name))
-                Users.Add(matchingUser);
-
-            LoginSucceeded?.Invoke(matchingUser.Name, matchingUser.Password, matchingUser.Type);
+            Console.WriteLine("Incorrect name or password");
+            return;
         }
-        else
-        {
-            Console.WriteLine("❌ Nieprawidłowy login lub hasło");
-        }
+        
+        Console.WriteLine($" Logged in as: {matchingUser.Name}");
+
+        LoginSucceeded?.Invoke(matchingUser.Name, matchingUser.Password, matchingUser.Type);
     }
 }

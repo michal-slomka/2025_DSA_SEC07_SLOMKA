@@ -7,8 +7,7 @@ namespace GetStartedApp.ViewModels;
 
 public partial class SecondViewModel : ViewModelBase
 {
-    private readonly MainWindowViewModel? _main;
-    public MainWindowViewModel? Main => _main;
+    public MainWindowViewModel? Main { get; }
 
     // ✅ Constructor used after login
     public SecondViewModel(string username, string password)
@@ -23,13 +22,13 @@ public partial class SecondViewModel : ViewModelBase
     public SecondViewModel(string username, string password, MainWindowViewModel main)
         : this(username, password)
     {
-        _main = main;
+        Main = main;
     }
 
     public string Username { get; }
     public string Password { get; }
 
-    public ObservableCollection<TaskColumn> Columns { get; set; } = new();
+    public ObservableCollection<TaskColumn> Columns { get; set; } = [];
 
     private void LoadMockData()
     {
