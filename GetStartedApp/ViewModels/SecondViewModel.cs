@@ -14,7 +14,6 @@ public partial class SecondViewModel : ViewModelBase
     {
         Username = $"Username: {username}";
         Password = $"Password: {password}";
-        Console.WriteLine($"🟢 Entered SecondViewModel with: {username}, {password}");
         LoadMockData();
     }
 
