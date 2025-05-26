@@ -74,7 +74,7 @@
                                 <StackPanel Spacing="8">
                                     <TextBlock Text="Status: TO DO" FontSize="12" Foreground="#6B7280"/>
                                     <TextBlock Text="Time spent: {Binding TimeSpent}" FontSize="12" Foreground="#6B7280"/>
-                                    <TextBlock Text="Deadline: {Binding Deadline}" FontSize="12" Foreground="#6B7280"/>
+                                    <TextBlock Text="{Binding Deadline, StringFormat='Deadline: {0:dd/MM/yyyy HH:mm:ss}'}"  FontSize="12" Foreground="#6B7280"/>
 
                                     <StackPanel Orientation="Horizontal" Spacing="6">
                                         <TextBlock Text="Assigned:" FontSize="12" Foreground="#6B7280"/>

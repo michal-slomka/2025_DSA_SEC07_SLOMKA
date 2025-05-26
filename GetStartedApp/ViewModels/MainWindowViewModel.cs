@@ -18,11 +18,13 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty] private ViewModelBase _currentPage;
 
     public ProjectsViewModel? ProjectsView { get; set; }
+    public int CurrentUserId { get; set; }
 
     private readonly LoginViewModel _loginView = new();
 
-    private void OnLoginSucceeded(string username, string password, string type)
+    private void OnLoginSucceeded(string username, string password, string type, int userId)
     {
+        CurrentUserId = userId;
         if (type is "admin" or "employee")
         {
             CurrentPage = new SecondViewModel(username, password, this);
@@ -31,6 +33,7 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             Console.WriteLine("Unknown user type");
         }
+        
     }
 
     // Navigation methods

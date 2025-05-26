@@ -4,12 +4,13 @@ using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GetStartedApp.Models;
+using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 
 namespace GetStartedApp.ViewModels;
 
 public partial class LoginViewModel : ViewModelBase
 {
-    public event Action<string, string, string>? LoginSucceeded;
+    public event Action<string, string, string, int>? LoginSucceeded;
 
     [ObservableProperty]
     private string _username = string.Empty;
@@ -33,6 +34,8 @@ public partial class LoginViewModel : ViewModelBase
         
         Console.WriteLine($" Logged in as: {matchingUser.Name}");
 
-        LoginSucceeded?.Invoke(matchingUser.Name, matchingUser.Password, matchingUser.Type);
+        LoginSucceeded?.Invoke(matchingUser.Name, matchingUser.Password, matchingUser.Type, matchingUser.UserId);
+        
+
     }
 }

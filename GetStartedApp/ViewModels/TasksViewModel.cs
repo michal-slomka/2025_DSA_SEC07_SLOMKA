@@ -1,41 +1,42 @@
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
+using System.Linq;
 using GetStartedApp.Models;
 
-namespace GetStartedApp.ViewModels;
-
-public partial class TasksViewModel : ViewModelBase
+namespace GetStartedApp.ViewModels
 {
-    private readonly MainWindowViewModel? _main;
-    public MainWindowViewModel? Main => _main;
-
-    public ObservableCollection<TaskItem> Tasks { get; set; }
-
-    // Constructor with MainWindowViewModel for command access
-    public TasksViewModel(MainWindowViewModel main)
+    public class TasksViewModel : ViewModelBase
     {
-        _main = main;
+        public ObservableCollection<TaskItem> Tasks { get; private set; } = new();
 
-        Tasks = new ObservableCollection<TaskItem>
+        public MainWindowViewModel Main { get; }
+
+        public TasksViewModel(MainWindowViewModel main)
         {
-            new TaskItem
-            {
-                Title = "Prepare Client Report",
-                Description = "Draft summary, compile updates, finalize.",
-                Project = "Project 1",
-                TimeSpent = "1h 15m",
-                Deadline = "13/05/25",
-                AssignedTo = "John"
-            },
-            new TaskItem
-            {
-                Title = "Write Unit Tests for Login Flow",
-                Description = "Implement unit tests using xUnit.",
-                Project = "Project 2",
-                TimeSpent = "2h 00m",
-                Deadline = "16/05/25",
-                AssignedTo = "Jane"
-            }
-        };
+            Main = main;
+            LoadTasks();
+        }
+
+        private void LoadTasks()
+        {
+            using var context = new TimeTrackingContext();
+
+            // Filter tasks for the current user
+            int currentUserId = Main.CurrentUserId;
+
+            var taskItems = context.Tasks
+                .Where(t => t.AssignedEmployeeId == currentUserId)
+                .Select(t => new TaskItem
+                {
+                    Title = t.Name,
+                    Description = t.Description,
+                    Deadline = t.EndTime.HasValue? t.EndTime.Value.ToString("dd/MM/yyyy HH:mm:ss"): "No deadline",
+                    Project = "",
+                    TimeSpent = "",
+                    
+                    AssignedTo = t.AssignedEmployee != null ? t.AssignedEmployee.Name : "Unassigned",
+                }).ToList();
+
+            Tasks = new ObservableCollection<TaskItem>(taskItems);
+        }
     }
 }
