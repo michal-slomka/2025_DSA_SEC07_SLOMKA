@@ -6,7 +6,7 @@ using GetStartedApp.Models;
 
 namespace GetStartedApp.ViewModels;
 
-public partial class NewUserViewModel : ViewModelBase
+public class NewUserViewModel : ViewModelBase
 {
     public NewUserViewModel()
     {
@@ -41,7 +41,7 @@ public partial class NewUserViewModel : ViewModelBase
         {
             Name = $"{Username}",
             Password = $"{Password}",
-            Type = "admin",
+            Type = "admin"
         };
 
         var userWithSameName = context.Users.SingleOrDefault(u => u.Name == newUser.Name);

@@ -1,10 +1,9 @@
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
 using GetStartedApp.Models;
 
 namespace GetStartedApp.ViewModels;
 
-public partial class ReportsViewModel : ViewModelBase
+public class ReportsViewModel : ViewModelBase
 {
     public MainWindowViewModel Main { get; }
 
@@ -14,9 +13,9 @@ public partial class ReportsViewModel : ViewModelBase
     {
         Main = main;
 
-        Reports = new ObservableCollection<TaskItem>
-        {
-            new TaskItem
+        Reports =
+        [
+            new()
             {
                 Title = "Weekly summary",
                 Description = "Compiled overall team performance",
@@ -25,7 +24,8 @@ public partial class ReportsViewModel : ViewModelBase
                 Deadline = "13/05/25",
                 AssignedTo = "Eva"
             },
-            new TaskItem
+
+            new()
             {
                 Title = "Bug tracking report",
                 Description = "List of all unresolved bugs",
@@ -34,6 +34,6 @@ public partial class ReportsViewModel : ViewModelBase
                 Deadline = "12/05/25",
                 AssignedTo = "Liam"
             }
-        };
+        ];
     }
 }

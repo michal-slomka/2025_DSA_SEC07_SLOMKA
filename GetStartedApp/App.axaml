@@ -2,38 +2,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:GetStartedApp.ViewModels"
              xmlns:views="using:GetStartedApp.Views"
-             xmlns:local="using:GetStartedApp"
              x:Class="GetStartedApp.App"
              RequestedThemeVariant="Light">
 
-    <!-- 🔁 ViewModel to View mappings -->
-    <Application.DataTemplates>
-        <DataTemplate DataType="vm:LoginViewModel">
-            <views:LoginView />
-        </DataTemplate>
-        <DataTemplate DataType="vm:SecondViewModel">
-            <views:SecondView />
-        </DataTemplate>
-        <DataTemplate DataType="vm:TasksViewModel">
-            <views:TasksView />
-        </DataTemplate>
-        <DataTemplate DataType="vm:ProjectsViewModel">
-            <views:ProjectsView />
-        </DataTemplate>
-        <DataTemplate DataType="vm:TimeLogsViewModel">
-            <views:TimeLogsView />
-        </DataTemplate>
-        <DataTemplate DataType="vm:ReportsViewModel">
-            <views:ReportsView />
-        </DataTemplate>
-        <DataTemplate DataType="vm:CreateProjectViewModel">
-            <views:CreateProjectView />
-        </DataTemplate>
+  <!-- 🔁 ViewModel to View mappings -->
+  <Application.DataTemplates>
+    <DataTemplate DataType="vm:LoginViewModel">
+      <views:LoginView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:SecondViewModel">
+      <views:SecondView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:TasksViewModel">
+      <views:TasksView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:ProjectsViewModel">
+      <views:ProjectsView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:TimeLogsViewModel">
+      <views:TimeLogsView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:ReportsViewModel">
+      <views:ReportsView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:CreateProjectViewModel">
+      <views:CreateProjectView />
+    </DataTemplate>
 
-    </Application.DataTemplates>
+  </Application.DataTemplates>
 
-    <!-- 🎨 Global styling -->
-    <Application.Styles>
-        <FluentTheme />
-    </Application.Styles>
+  <!-- 🎨 Global styling -->
+  <Application.Styles>
+    <FluentTheme />
+  </Application.Styles>
 </Application>

@@ -9,83 +9,83 @@
              x:Class="GetStartedApp.Views.LoginView"
              x:DataType="vm:LoginViewModel">
 
-    <Design.DataContext>
-        <vm:LoginViewModel />
-    </Design.DataContext>
+  <Design.DataContext>
+    <vm:LoginViewModel />
+  </Design.DataContext>
 
-    
-    <UserControl.Styles>
-  <Style Selector="TextBox">
-    <Setter Property="Background" Value="#E5E7EB"/>
-    <Setter Property="Foreground" Value="Gray"/>
-    <Setter Property="CaretBrush" Value="Gray"/>
-    <Setter Property="FontSize" Value="16"/>
-    <Setter Property="Padding" Value="10"/>
-    <Setter Property="CornerRadius" Value="8"/>
-    <Setter Property="BorderThickness" Value="0"/>
-  </Style>
 
-  
-  <Style Selector="TextBox:focus">
-    <Setter Property="Background" Value="#E5E7EB"/>
-    <Setter Property="Foreground" Value="Gray"/>
-    <Setter Property="CaretBrush" Value="Gray"/>
-  </Style>
-</UserControl.Styles>
+  <UserControl.Styles>
+    <Style Selector="TextBox">
+      <Setter Property="Background" Value="#E5E7EB" />
+      <Setter Property="Foreground" Value="Gray" />
+      <Setter Property="CaretBrush" Value="Gray" />
+      <Setter Property="FontSize" Value="16" />
+      <Setter Property="Padding" Value="10" />
+      <Setter Property="CornerRadius" Value="8" />
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
 
-    <Grid Background="#F8F9FA">
-        <StackPanel VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Spacing="24">
 
-            
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        Spacing="12">
-                <Border Background="#7AA9BA"
-                        Width="48"
-                        Height="48"
-                        CornerRadius="8"
-                        VerticalAlignment="Center">
-                    <TextBlock Text="🕒"
-                               FontSize="24"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
-                </Border>
-                <TextBlock Text="TimeWise"
-                           FontSize="32"
-                           FontWeight="Bold"
-                           VerticalAlignment="Center"
-                           Foreground="Black"/>
-            </StackPanel>
+    <Style Selector="TextBox:focus">
+      <Setter Property="Background" Value="#E5E7EB" />
+      <Setter Property="Foreground" Value="Gray" />
+      <Setter Property="CaretBrush" Value="Gray" />
+    </Style>
+  </UserControl.Styles>
 
-            
-            <StackPanel Width="280"
-                        Spacing="12">
+  <Grid Background="#F8F9FA">
+    <StackPanel VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Spacing="24">
 
-                <!-- Email -->
-                <TextBox Watermark="Email"
-                         Text="{Binding Username, Mode=TwoWay}"/>
 
-                <!-- Password -->
-                <TextBox Watermark="Password"
-                         Text="{Binding Password, Mode=TwoWay}"
-                         PasswordChar="●"/>
+      <StackPanel Orientation="Horizontal"
+                  HorizontalAlignment="Center"
+                  Spacing="12">
+        <Border Background="#7AA9BA"
+                Width="48"
+                Height="48"
+                CornerRadius="8"
+                VerticalAlignment="Center">
+          <TextBlock Text="🕒"
+                     FontSize="24"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center" />
+        </Border>
+        <TextBlock Text="TimeWise"
+                   FontSize="32"
+                   FontWeight="Bold"
+                   VerticalAlignment="Center"
+                   Foreground="Black" />
+      </StackPanel>
 
-                <!-- Login Button -->
-                <Button Content="Log In"
-                        Command="{Binding LoginCommand}"
-                        Width="120"
-                        HorizontalAlignment="Center"
-                        Background="#7AA9BA"
-                        Foreground="Black"
-                        FontWeight="Bold"
-                        FontSize="16"
-                        Padding="8"
-                        CornerRadius="8"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"/>
-            </StackPanel>
-        </StackPanel>
-    </Grid>
+
+      <StackPanel Width="280"
+                  Spacing="12">
+
+        <!-- Email -->
+        <TextBox Watermark="Email"
+                 Text="{Binding Username, Mode=TwoWay}" />
+
+        <!-- Password -->
+        <TextBox Watermark="Password"
+                 Text="{Binding Password, Mode=TwoWay}"
+                 PasswordChar="●" />
+
+        <!-- Login Button -->
+        <Button Content="Log In"
+                Command="{Binding LoginCommand}"
+                Width="120"
+                HorizontalAlignment="Center"
+                Background="#7AA9BA"
+                Foreground="Black"
+                FontWeight="Bold"
+                FontSize="16"
+                Padding="8"
+                CornerRadius="8"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center" />
+      </StackPanel>
+    </StackPanel>
+  </Grid>
 </UserControl>

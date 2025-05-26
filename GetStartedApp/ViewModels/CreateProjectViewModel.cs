@@ -4,77 +4,80 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GetStartedApp.Models;
 
-namespace GetStartedApp.ViewModels
+namespace GetStartedApp.ViewModels;
+
+public partial class CreateProjectViewModel : ViewModelBase
 {
-    public partial class CreateProjectViewModel : ViewModelBase
+    [ObservableProperty] private string _projectName = string.Empty;
+    [ObservableProperty] private string _projectDescription = string.Empty;
+    [ObservableProperty] private string _newAssignee = string.Empty;
+
+    /// <summary>
+    /// The list you’re building up in the “Add” UI.
+    /// </summary>
+    public ObservableCollection<string> AssignedUsers { get; } = new();
+
+    private readonly MainWindowViewModel _main;
+
+    public CreateProjectViewModel(MainWindowViewModel main)
     {
-        [ObservableProperty] private string projectName        = string.Empty;
-        [ObservableProperty] private string projectDescription = string.Empty;
-        [ObservableProperty] private string newAssignee        = string.Empty;
+        _main = main ?? throw new ArgumentNullException(nameof(main));
+        AddAssigneeCommand = new RelayCommand(AddAssignee);
+        SaveCommand = new RelayCommand(Save);
+        CancelCommand = new RelayCommand(GoBack);
+    }
 
-        /// <summary>
-        /// The list you’re building up in the “Add” UI.
-        /// </summary>
-        public ObservableCollection<string> AssignedUsers { get; } = new();
+    public IRelayCommand AddAssigneeCommand { get; }
+    public IRelayCommand SaveCommand { get; }
+    public IRelayCommand CancelCommand { get; }
 
-        private readonly MainWindowViewModel main;
-
-        public CreateProjectViewModel(MainWindowViewModel main)
+    private void AddAssignee()
+    {
+        var name = NewAssignee.Trim();
+        if (!string.IsNullOrWhiteSpace(name) && !AssignedUsers.Contains(name))
         {
-            this.main = main ?? throw new ArgumentNullException(nameof(main));
-            AddAssigneeCommand = new RelayCommand(AddAssignee);
-            SaveCommand        = new RelayCommand(Save);
-            CancelCommand      = new RelayCommand(GoBack);
+            AssignedUsers.Add(name);
+            NewAssignee = string.Empty;
+        }
+    }
+
+    private void Save()
+    {
+        if (string.IsNullOrWhiteSpace(ProjectName))
+        {
+            return;
         }
 
-        public IRelayCommand AddAssigneeCommand { get; }
-        public IRelayCommand SaveCommand        { get; }
-        public IRelayCommand CancelCommand      { get; }
-
-        private void AddAssignee()
+        // 1) Auto-add whatever is still in the textbox
+        var last = NewAssignee.Trim();
+        if (!string.IsNullOrWhiteSpace(last) && !AssignedUsers.Contains(last))
         {
-            var name = NewAssignee.Trim();
-            if (!string.IsNullOrWhiteSpace(name) && !AssignedUsers.Contains(name))
-            {
-                AssignedUsers.Add(name);
-                NewAssignee = string.Empty;
-            }
+            AssignedUsers.Add(last);
         }
 
-        private void Save()
+        // 2) Build the ProjectItem from your full list
+        var p = new ProjectItem
         {
-            if (string.IsNullOrWhiteSpace(ProjectName))
-                return;
+            Name = ProjectName.Trim(),
+            Description = ProjectDescription.Trim(),
+            AssignedUsers = new ObservableCollection<string>(AssignedUsers)
+        };
 
-            // 1) Auto-add whatever is still in the textbox
-            var last = NewAssignee.Trim();
-            if (!string.IsNullOrWhiteSpace(last) && !AssignedUsers.Contains(last))
-                AssignedUsers.Add(last);
+        // 3) Drop it into the master list and go back
+        _main.ProjectsView ??= new ProjectsViewModel(_main);
+        _main.ProjectsView.Projects.Add(p);
 
-            // 2) Build the ProjectItem from your full list
-            var p = new ProjectItem
-            {
-                Name          = ProjectName.Trim(),
-                Description   = ProjectDescription.Trim(),
-                AssignedUsers = new ObservableCollection<string>(AssignedUsers)
-            };
+        // 4) Clear out the form for next time
+        ProjectName = string.Empty;
+        ProjectDescription = string.Empty;
+        AssignedUsers.Clear();
+        NewAssignee = string.Empty;
 
-            // 3) Drop it into the master list and go back
-            main.ProjectsView ??= new ProjectsViewModel(main);
-            main.ProjectsView.Projects.Add(p);
+        _main.CurrentPage = _main.ProjectsView;
+    }
 
-            // 4) Clear out the form for next time
-            ProjectName        = string.Empty;
-            ProjectDescription = string.Empty;
-            AssignedUsers.Clear();
-            NewAssignee        = string.Empty;
-
-            main.CurrentPage = main.ProjectsView;
-        }
-
-        private void GoBack()
-        {
-            main.CurrentPage = main.ProjectsView!;
-        }
+    private void GoBack()
+    {
+        _main.CurrentPage = _main.ProjectsView!;
     }
 }

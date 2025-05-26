@@ -3,7 +3,6 @@
         xmlns:vm="using:GetStartedApp.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:model="using:GetStartedApp.Models"
         mc:Ignorable="d"
         x:Class="GetStartedApp.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -13,12 +12,12 @@
         Height="800"
         Background="#F9F9F9">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+  <Design.DataContext>
+    <vm:MainWindowViewModel />
+  </Design.DataContext>
 
-    <!-- Smooth content replacement (without unsupported property) -->
-    <TransitioningContentControl Content="{Binding CurrentPage}"
-                                 HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Stretch"/>
+  <!-- Smooth content replacement (without unsupported property) -->
+  <TransitioningContentControl Content="{Binding CurrentPage}"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch" />
 </Window>

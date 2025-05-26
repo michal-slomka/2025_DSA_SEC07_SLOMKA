@@ -10,7 +10,7 @@ public class TaskItem
     public string AssignedTo { get; set; } = "";
 
     // 🔵 Optional enhancements for future use:
-    public string Status { get; set; } = "";        // To Do, In Progress, Done
-    public string Priority { get; set; } = "";      // Low, Medium, High
-    public string AvatarUrl { get; set; } = "";     // URL or path to user icon
+    public string Status { get; set; } = ""; // To Do, In Progress, Done
+    public string Priority { get; set; } = ""; // Low, Medium, High
+    public string AvatarUrl { get; set; } = ""; // URL or path to user icon
 }

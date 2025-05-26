@@ -1,13 +1,11 @@
 using Avalonia.Controls;
 
-namespace GetStartedApp.Views
+namespace GetStartedApp.Views;
+
+public partial class BoardView : UserControl
 {
-    public partial class BoardView : UserControl
+    public BoardView()
     {
-        public BoardView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
-

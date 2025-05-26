@@ -11,14 +11,17 @@ public partial class MainWindowViewModel : ViewModelBase
 {
     public MainWindowViewModel()
     {
+        // TODO: load this once on startup
+        // using var context = new TimeTrackingContext();
+
         _loginView.LoginSucceeded += OnLoginSucceeded;
         CurrentPage = _loginView;
     }
-    
+
     [ObservableProperty] private ViewModelBase _currentPage;
 
     public ProjectsViewModel? ProjectsView { get; set; }
-    public int CurrentUserId { get; set; }
+    public int CurrentUserId { get; private set; }
 
     private readonly LoginViewModel _loginView = new();
 
@@ -33,7 +36,6 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             Console.WriteLine("Unknown user type");
         }
-        
     }
 
     // Navigation methods
@@ -42,7 +44,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         CurrentPage = _loginView;
     }
-    
+
     [RelayCommand]
     private void ShowBoard()
     {
@@ -56,7 +58,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         CurrentPage = ProjectsView;
     }
-    
+
     [RelayCommand]
     private void ShowTasks()
     {

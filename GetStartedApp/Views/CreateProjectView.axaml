@@ -8,62 +8,62 @@
 
   <StackPanel Margin="24" Spacing="16">
 
-    <TextBlock 
+    <TextBlock
       Text="Create Project"
       FontSize="28"
       FontWeight="Bold"
-      Foreground="#111827"/>
+      Foreground="#111827" />
 
-    <TextBox 
+    <TextBox
       Watermark="Project Name"
-      Text="{Binding ProjectName, Mode=TwoWay}"/>
+      Text="{Binding ProjectName, Mode=TwoWay}" />
 
-    <TextBox 
+    <TextBox
       Watermark="Description"
-      Text="{Binding ProjectDescription, Mode=TwoWay}"/>
+      Text="{Binding ProjectDescription, Mode=TwoWay}" />
 
-    <TextBlock 
+    <TextBlock
       Text="Add Assignees"
       FontWeight="SemiBold"
-      Margin="0,12,0,4"/>
+      Margin="0,12,0,4" />
 
     <!-- Single add-assignee row -->
     <StackPanel Orientation="Horizontal" Spacing="8">
-      <TextBox 
+      <TextBox
         Width="200"
         Watermark="Type a name"
-        Text="{Binding NewAssignee, Mode=TwoWay}"/>
-      <Button 
+        Text="{Binding NewAssignee, Mode=TwoWay}" />
+      <Button
         Content="Add"
-        Command="{Binding AddAssigneeCommand}"/>
+        Command="{Binding AddAssigneeCommand}" />
     </StackPanel>
 
     <!-- Show all selected assignees -->
-    <ScrollViewer 
-      Height="80" 
+    <ScrollViewer
+      Height="80"
       VerticalScrollBarVisibility="Auto">
-      <ItemsControl 
+      <ItemsControl
         ItemsSource="{Binding AssignedUsers}">
-        
+
         <!-- Correct ItemsPanel -->
         <ItemsControl.ItemsPanel>
           <ItemsPanelTemplate>
-            <StackPanel Orientation="Horizontal" Spacing="8"/>
+            <StackPanel Orientation="Horizontal" Spacing="8" />
           </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
 
         <!-- ItemTemplate with DataType -->
         <ItemsControl.ItemTemplate>
           <DataTemplate x:DataType="x:String">
-            <Border 
+            <Border
               Background="#E5E7EB"
               CornerRadius="4"
               Padding="4,2"
               Margin="0,4,4,0">
-              <TextBlock 
+              <TextBlock
                 Text="{Binding}"
                 FontSize="14"
-                Foreground="#374151"/>
+                Foreground="#374151" />
             </Border>
           </DataTemplate>
         </ItemsControl.ItemTemplate>
@@ -72,22 +72,22 @@
     </ScrollViewer>
 
     <!-- Save / Cancel -->
-    <StackPanel 
-      Orientation="Horizontal" 
-      Spacing="12" 
+    <StackPanel
+      Orientation="Horizontal"
+      Spacing="12"
       Margin="0,20,0,0">
-      <Button 
+      <Button
         Content="Save"
         Command="{Binding SaveCommand}"
         Background="#10B981"
         Foreground="White"
-        Padding="8,4"/>
-      <Button 
+        Padding="8,4" />
+      <Button
         Content="Cancel"
         Command="{Binding CancelCommand}"
         Background="#E5E7EB"
         Foreground="#374151"
-        Padding="8,4"/>
+        Padding="8,4" />
     </StackPanel>
 
   </StackPanel>

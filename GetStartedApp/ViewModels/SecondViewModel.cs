@@ -1,11 +1,9 @@
-using System;
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
 using GetStartedApp.Models;
 
 namespace GetStartedApp.ViewModels;
 
-public partial class SecondViewModel : ViewModelBase
+public class SecondViewModel : ViewModelBase
 {
     public MainWindowViewModel? Main { get; }
 

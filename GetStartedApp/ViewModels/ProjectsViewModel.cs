@@ -3,48 +3,47 @@ using System.Linq;
 using CommunityToolkit.Mvvm.Input;
 using GetStartedApp.Models;
 
-namespace GetStartedApp.ViewModels
+namespace GetStartedApp.ViewModels;
+
+public class ProjectsViewModel : ViewModelBase
 {
-    public partial class ProjectsViewModel : ViewModelBase
+    public ObservableCollection<ProjectItem> Projects { get; private set; } = [];
+
+    public MainWindowViewModel Main { get; }
+
+    public IRelayCommand OpenCreateProjectCommand { get; }
+
+    public ProjectsViewModel(MainWindowViewModel main)
     {
-        public ObservableCollection<ProjectItem> Projects { get; private set; } = [];
+        Main = main;
+        OpenCreateProjectCommand = new RelayCommand(OpenCreateProject);
+        LoadProjects();
+    }
 
-        public MainWindowViewModel Main { get; }
+    private void LoadProjects()
+    {
+        using var context = new TimeTrackingContext();
 
-        public IRelayCommand OpenCreateProjectCommand { get; }
+        var projects = from p in context.Projects select p;
 
-        public ProjectsViewModel(MainWindowViewModel main)
+        var projectItems = projects.Select(p => new ProjectItem
         {
-            Main = main;
-            OpenCreateProjectCommand = new RelayCommand(OpenCreateProject);
-            LoadProjects();
-        }
+            Name = p.Name,
+            Manager = $"Manager: {p.Manager.Name}",
+            Description = p.Description,
+            AssignedUsers =
+                new ObservableCollection<string>(
+                    p.Tasks.AsEnumerable()
+                        .Select(t => t.AssignedEmployee.Name)
+                        .Distinct()
+                )
+        });
 
-        private void LoadProjects()
-        {
-            using var context = new TimeTrackingContext();
+        Projects = new ObservableCollection<ProjectItem>(projectItems);
+    }
 
-            var projects = from p in context.Projects select p;
-
-            var projectItems = projects.Select(p => new ProjectItem
-            {
-                Name = p.Name,
-                Manager = $"Manager: {p.Manager.Name}",
-                Description = p.Description,
-                AssignedUsers =
-                    new ObservableCollection<string>(
-                        p.Tasks.AsEnumerable()
-                            .Select(t => t.AssignedEmployee.Name)
-                            .Distinct()
-                    )
-            });
-
-            Projects = new ObservableCollection<ProjectItem>(projectItems);
-        }
-
-        private void OpenCreateProject()
-        {
-            Main.CurrentPage = new CreateProjectViewModel(Main);
-        }
+    private void OpenCreateProject()
+    {
+        Main.CurrentPage = new CreateProjectViewModel(Main);
     }
 }
