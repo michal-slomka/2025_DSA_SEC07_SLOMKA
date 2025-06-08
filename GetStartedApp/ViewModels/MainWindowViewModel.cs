@@ -26,10 +26,8 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public ProjectsViewModel? ProjectsView { get; set; }
 
-    // TODO: refactor
     public int CurrentUserId { get; private set; }
 
-    // public string CurrentUserName { get; private set; } = "";
     public string CurrentUserType { get; private set; } = "";
 
     private readonly LoginViewModel _loginView = new();
@@ -37,7 +35,6 @@ public partial class MainWindowViewModel : ViewModelBase
     private void OnLoginSucceeded(string username, string password, string type, int userId)
     {
         CurrentUserId = userId;
-        // CurrentUserName = username;
         CurrentUserType = type;
 
         CurrentPage = new SecondViewModel(this, username, password);

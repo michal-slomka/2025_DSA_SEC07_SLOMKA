@@ -6,13 +6,8 @@ using GetStartedApp.Models;
 
 namespace GetStartedApp.ViewModels;
 
-public class NewUserViewModel : ViewModelBase
+public partial class NewUserViewModel : ViewModelBase
 {
-    public NewUserViewModel()
-    {
-        RegisterUserCommand = new RelayCommand(RegisterUser);
-    }
-
     public string Username
     {
         get;
@@ -31,8 +26,7 @@ public class NewUserViewModel : ViewModelBase
         set => SetProperty(ref field, value);
     } = "employee";
 
-    public ICommand RegisterUserCommand { get; }
-
+    [RelayCommand]
     private void RegisterUser()
     {
         using var context = new TimeTrackingContext();
