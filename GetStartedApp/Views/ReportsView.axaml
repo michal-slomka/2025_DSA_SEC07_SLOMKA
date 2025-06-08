@@ -1,28 +1,28 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:GetStartedApp.ViewModels"
-             x:Class="GetStartedApp.Views.ReportsView"
+             xmlns:views="clr-namespace:GetStartedApp.Views" x:Class="GetStartedApp.Views.ReportsView"
              x:DataType="vm:ReportsViewModel"
              Background="#F9FAFB">
 
-  <DockPanel>
-    <!-- Sidebar -->
-    <Border Background="#F1F1F1" Width="200" DockPanel.Dock="Left">
-      <StackPanel Margin="20,20,20,10" Spacing="20">
-        <TextBlock Text="🕒 TimeWise" FontSize="22" FontWeight="Bold" Foreground="#1F2937"/>
-        <Button Content="🏠 Dashboard" Background="Transparent" Foreground="#1F2937" Command="{Binding Main.ShowBoardCommand}" />
-        <Button Content="📁 Projects" Background="Transparent" Foreground="#1F2937" Command="{Binding Main.ShowProjectsCommand}" />
-        <Button Content="📝 Tasks" Background="Transparent" Foreground="#1F2937" Command="{Binding Main.ShowTasksCommand}" />
-        <Button Content="⏱ Time Logs" Background="Transparent" Foreground="#1F2937" Command="{Binding Main.ShowTimeLogsCommand}" />
-        <Button Content="📊 Reports" Background="Transparent" Foreground="#3B82F6" Command="{Binding Main.ShowReportsCommand}" />
-        <Button Content="← Log Out" Background="Transparent" Foreground="#EF4444" HorizontalAlignment="Left" Command="{Binding Main.LogOutCommand}" Margin="0,40,0,0"/>
-      </StackPanel>
-    </Border>
+    <DockPanel>
+        <views:Sidebar DockPanel.Dock="Left" DataContext="{Binding Main}" Width="200" />
 
-    <!-- Main Content -->
-    <StackPanel Margin="24" Spacing="16">
-      <TextBlock Text="📊 Reports" FontSize="28" FontWeight="Bold" Foreground="#111827"/>
-      <TextBlock Text="This is the Reports view" FontSize="16" Foreground="#374151"/>
-    </StackPanel>
-  </DockPanel>
+        <StackPanel Margin="24" Spacing="16">
+            <TextBlock Text="📊 Reports" FontSize="28" FontWeight="Bold" Foreground="#111827"/>
+            <TextBlock Text="This is the Reports view" FontSize="16" Foreground="#374151"/>
+
+            <DataGrid ItemsSource="{Binding Reports}" AutoGenerateColumns="False"
+                      Background="#FFFFFF" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="8">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*" />
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" />
+                    <DataGridTextColumn Header="Project" Binding="{Binding Project}" Width="Auto" />
+                    <DataGridTextColumn Header="Time Spent" Binding="{Binding TimeSpent}" Width="Auto" />
+                    <DataGridTextColumn Header="Deadline" Binding="{Binding Deadline}" Width="Auto" />
+                    <DataGridTextColumn Header="Assigned To" Binding="{Binding AssignedTo}" Width="Auto" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </DockPanel>
 </UserControl>

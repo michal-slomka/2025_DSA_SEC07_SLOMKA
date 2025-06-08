@@ -1,124 +1,85 @@
 <UserControl
-  xmlns="https://github.com/avaloniaui"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:vm="using:GetStartedApp.ViewModels"
-  xmlns:models="using:GetStartedApp.Models"
-  x:Class="GetStartedApp.Views.ProjectsView"
-  x:DataType="vm:ProjectsViewModel"
-  Background="#F9FAFB">
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:GetStartedApp.ViewModels"
+    xmlns:views="clr-namespace:GetStartedApp.Views"
+    xmlns:models="using:GetStartedApp.Models"
+    x:Class="GetStartedApp.Views.ProjectsView"
+    x:DataType="vm:ProjectsViewModel"
+    Background="#F9FAFB">
 
-  <DockPanel>
+    <DockPanel>
+        <views:Sidebar DockPanel.Dock="Left" DataContext="{Binding Main}" Width="200" />
 
-    <!-- Sidebar -->
-    <Border Background="#F1F1F1" Width="200" DockPanel.Dock="Left">
-      <StackPanel Margin="20" Spacing="20">
-        <TextBlock Text="🕒 TimeWise"
-                   FontSize="22"
-                   FontWeight="Bold"
-                   Foreground="#1F2937"/>
-        <Button Content="🏠 Dashboard"
-                Background="Transparent"
-                Foreground="#1F2937"
-                Command="{Binding Main.ShowBoardCommand}"/>
-        <Button Content="📁 Projects"
-                Background="Transparent"
-                Foreground="#3B82F6"
-                Command="{Binding Main.ShowProjectsCommand}"/>
-        <Button Content="📝 Tasks"
-                Background="Transparent"
-                Foreground="#1F2937"
-                Command="{Binding Main.ShowTasksCommand}"/>
-        <Button Content="⏱ Time Logs"
-                Background="Transparent"
-                Foreground="#1F2937"
-                Command="{Binding Main.ShowTimeLogsCommand}"/>
-        <Button Content="📊 Reports"
-                Background="Transparent"
-                Foreground="#1F2937"
-                Command="{Binding Main.ShowReportsCommand}"/>
-        <Button Content="← Log Out"
-                Background="Transparent"
-                Foreground="#EF4444"
-                Command="{Binding Main.LogOutCommand}"
-                Margin="0,40,0,0"/>
-      </StackPanel>
-    </Border>
+        <StackPanel Margin="24" Spacing="16">
 
-    <!-- Main content -->
-    <StackPanel Margin="24" Spacing="16">
+            <StackPanel Orientation="Horizontal" Spacing="16">
+                <TextBlock Text="Projects"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="#111827"/>
+                <TextBox Width="200"
+                         Watermark="🔍 Search"/>
+                <Button Content="➕ Create Project"
+                        Background="#3B82F6"
+                        Foreground="White"
+                        Padding="8,4"
+                        CornerRadius="4"
+                        Command="{Binding OpenCreateProjectCommand}"/>
+            </StackPanel>
 
-      <!-- Header -->
-      <StackPanel Orientation="Horizontal" Spacing="16">
-        <TextBlock Text="Projects"
-                   FontSize="28"
-                   FontWeight="Bold"
-                   Foreground="#111827"/>
-        <TextBox Width="200"
-                 Watermark="🔍 Search"/>
-        <Button Content="➕ Create Project"
-                Background="#3B82F6"
-                Foreground="White"
-                Padding="8,4"
-                CornerRadius="4"
-                Command="{Binding OpenCreateProjectCommand}"/>
-      </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Projects}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="models:ProjectItem">
+                            <Border Background="White"
+                                    CornerRadius="8"
+                                    Padding="16"
+                                    Margin="0,12,0,0"
+                                    BorderBrush="#E5E7EB"
+                                    BorderThickness="1">
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="{Binding Name}"
+                                               FontSize="16"
+                                               FontWeight="Bold"
+                                               Foreground="#111827"/>
 
-      <!-- Projects List -->
-      <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <ItemsControl ItemsSource="{Binding Projects}">
-          <ItemsControl.ItemTemplate>
-            <DataTemplate x:DataType="models:ProjectItem">
-              <Border Background="White"
-                      CornerRadius="8"
-                      Padding="16"
-                      Margin="0,12,0,0"
-                      BorderBrush="#E5E7EB"
-                      BorderThickness="1">
-                <StackPanel Spacing="8">
-                  <!-- 1) Project Name -->
-                  <TextBlock Text="{Binding Name}"
-                             FontSize="16"
-                             FontWeight="Bold"
-                             Foreground="#111827"/>
+                                    <TextBlock Text="{Binding Description}"
+                                               FontSize="13"
+                                               Foreground="#374151"
+                                               TextWrapping="Wrap"/>
 
-                  <!-- 2) Description -->
-                  <TextBlock Text="{Binding Description}"
-                             FontSize="13"
-                             Foreground="#374151"
-                             TextWrapping="Wrap"/>
-
-                  <!-- 3) Assigned Users -->
-                  <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,8,0,0">
-                    <TextBlock Text="👥 Assigned:"
-                               FontWeight="Bold"
-                               FontSize="13"
-                               Foreground="#6B7280"/>
-                    <ItemsControl ItemsSource="{Binding AssignedUsers}">
-                      <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                          <StackPanel Orientation="Horizontal" Spacing="8"/>
-                        </ItemsPanelTemplate>
-                      </ItemsControl.ItemsPanel>
-                      <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                          <Border Background="#E5E7EB"
-                                  CornerRadius="4"
-                                  Padding="4,2">
-                            <TextBlock Text="{Binding}"
-                                       FontSize="12"
-                                       Foreground="#374151"/>
-                          </Border>
+                                    <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,8,0,0">
+                                        <TextBlock Text="👥 Assigned:"
+                                                   FontWeight="Bold"
+                                                   FontSize="13"
+                                                   Foreground="#6B7280"/>
+                                        <ItemsControl ItemsSource="{Binding AssignedUsers}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Orientation="Horizontal" Spacing="8"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Background="#E5E7EB"
+                                                            CornerRadius="4"
+                                                            Padding="4,2">
+                                                        <TextBlock Text="{Binding}"
+                                                                   FontSize="12"
+                                                                   Foreground="#374151"/>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
                         </DataTemplate>
-                      </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                  </StackPanel>
-                </StackPanel>
-              </Border>
-            </DataTemplate>
-          </ItemsControl.ItemTemplate>
-        </ItemsControl>
-      </ScrollViewer>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
 
-    </StackPanel>
-  </DockPanel>
+        </StackPanel>
+    </DockPanel>
 </UserControl>
