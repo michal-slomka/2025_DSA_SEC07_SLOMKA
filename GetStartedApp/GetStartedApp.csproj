@@ -30,4 +30,10 @@
         </PackageReference>
         <PackageReference Include="MySql.EntityFrameworkCore" Version="9.0.3"/>
     </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Views\Sidebar.xaml.cs">
+        <DependentUpon>Sidebar.axaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
 </Project>
