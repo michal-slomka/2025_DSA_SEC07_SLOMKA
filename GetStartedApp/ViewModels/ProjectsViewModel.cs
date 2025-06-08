@@ -28,7 +28,7 @@ public partial class ProjectsViewModel : ViewModelBase
             from p in context.Projects
             where p.ManagerId == Main.CurrentUserId
             select p;
-        // projects in which the user has a task assigned
+        // projects in which the current user has a task assigned
         var employeeProjects = 
             from p in context.Projects
             join t in context.Tasks on p.ProjectId equals t.ProjectId
