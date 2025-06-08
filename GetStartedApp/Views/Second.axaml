@@ -3,6 +3,7 @@
              xmlns:vm="using:GetStartedApp.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:GetStartedApp.Views"
              mc:Ignorable="d"
              x:Class="GetStartedApp.Views.SecondView"
              x:DataType="vm:SecondViewModel"
@@ -10,46 +11,7 @@
 
   <DockPanel>
     <!-- Sidebar -->
-    <Border Background="#F1F1F1" Width="200" DockPanel.Dock="Left">
-      <StackPanel Margin="20,20,20,10" Spacing="20">
-        <TextBlock Text="🕒 TimeWise"
-                   FontSize="22"
-                   FontWeight="Bold"
-                   Foreground="#1F2937" />
-
-        <Button Content="🏠 Dashboard"
-                Background="Transparent"
-                Foreground="#3B82F6"
-                Command="{Binding Main.ShowBoardCommand}" />
-
-        <Button Content="📁 Projects"
-                Background="Transparent"
-                Foreground="#1F2937"
-                Command="{Binding Main.ShowProjectsCommand}" />
-
-        <Button Content="📝 Tasks"
-                Background="Transparent"
-                Foreground="#1F2937"
-                Command="{Binding Main.ShowTasksCommand}" />
-
-        <Button Content="⏱ Time Logs"
-                Background="Transparent"
-                Foreground="#1F2937"
-                Command="{Binding Main.ShowTimeLogsCommand}" />
-
-        <Button Content="📊 Reports"
-                Background="Transparent"
-                Foreground="#1F2937"
-                Command="{Binding Main.ShowReportsCommand}" />
-
-        <Button Content="← Log Out"
-                Background="Transparent"
-                Foreground="#EF4444"
-                HorizontalAlignment="Left"
-                Command="{Binding Main.LogOutCommand}"
-                Margin="0,40,0,0" />
-      </StackPanel>
-    </Border>
+    <views:Sidebar DockPanel.Dock="Left" DataContext="{Binding Main}" Width="200" />
 
     <!-- Main Board -->
     <StackPanel Margin="20" Spacing="16">

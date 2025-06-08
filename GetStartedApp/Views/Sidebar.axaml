@@ -9,7 +9,7 @@
     <Button Content="📁 Projects" Background="Transparent" Foreground="#1F2937" Command="{Binding ShowProjectsCommand}" />
     <Button Content="📝 Tasks" Background="Transparent" Foreground="#1F2937" Command="{Binding ShowTasksCommand}" />
     <Button Content="⏱ Time Logs" Background="Transparent" Foreground="#1F2937" Command="{Binding ShowTimeLogsCommand}" />
-    <Button Content="📊 Reports" Background="Transparent" Foreground="#3B82F6" Command="{Binding ShowReportsCommand}" />
+    <Button Content="📊 Reports" Background="Transparent" Foreground="#1F2937" Command="{Binding ShowReportsCommand}" />
     <Button Content="← Log Out" Background="Transparent" Foreground="#EF4444" HorizontalAlignment="Left"
             Command="{Binding LogOutCommand}" Margin="0,40,0,0" />
   </StackPanel>
