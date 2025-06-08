@@ -64,7 +64,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void ShowTasks()
     {
-        CurrentPage = new TasksViewModel(this, CurrentUserType);
+        CurrentPage = new TasksViewModel(this);
     }
 
     [RelayCommand]

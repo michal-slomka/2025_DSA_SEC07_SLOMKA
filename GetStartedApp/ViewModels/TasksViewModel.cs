@@ -20,20 +20,26 @@ public class TasksViewModel : ViewModelBase
     {
         using var context = new TimeTrackingContext();
 
-        // Filter tasks for the current user
-        var currentUserId = Main.CurrentUserId;
+        // all tasks
+        var adminTasks = from task in context.Tasks select task;
+        // tasks assigned to the current user
+        var otherTasks = from task in context.Tasks where task.AssignedEmployeeId == Main.CurrentUserId select task;
 
-        var taskItems = context.Tasks
-            .Where(t => t.AssignedEmployeeId == currentUserId)
-            .Select(t => new TaskItem
-            {
-                Title = t.Name,
-                Description = t.Description,
-                Deadline = t.EndTime.HasValue ? t.EndTime.Value.ToString("dd/MM/yyyy HH:mm:ss") : "No deadline",
-                Project = "",
-                TimeSpent = "",
-                AssignedTo = t.AssignedEmployee.Name
-            });
+        var tasks = Main.CurrentUserType switch
+        {
+            "admin" => adminTasks,
+            _ => otherTasks
+        };
+
+        var taskItems = tasks.Select(t => new TaskItem
+        {
+            Title = t.Name,
+            Description = t.Description,
+            Deadline = t.EndTime.HasValue ? t.EndTime.Value.ToString("dd/MM/yyyy HH:mm:ss") : "No deadline",
+            Project = $"In: {t.Project.Name}",
+            TimeSpent = "",
+            AssignedTo = Main.CurrentUserType == "admin" ? t.AssignedEmployee.Name : "You"
+        });
 
         Tasks = new ObservableCollection<TaskItem>(taskItems);
     }
