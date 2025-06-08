@@ -1,6 +1,7 @@
-﻿using System;
+﻿using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using GetStartedApp.Models;
 
 namespace GetStartedApp.ViewModels;
 
@@ -11,8 +12,11 @@ public partial class MainWindowViewModel : ViewModelBase
 {
     public MainWindowViewModel()
     {
-        // TODO: load this once on startup
-        // using var context = new TimeTrackingContext();
+        // Makes the app connect to the database at startup
+        // Otherwise, there's an ugly hangup when logging in for the first time
+        using var context = new TimeTrackingContext();
+        var users = from u in context.Users select u;
+        _ = users.ToList();
 
         _loginView.LoginSucceeded += OnLoginSucceeded;
         CurrentPage = _loginView;
