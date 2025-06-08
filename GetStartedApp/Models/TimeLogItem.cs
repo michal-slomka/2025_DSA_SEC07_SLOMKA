@@ -1,3 +1,5 @@
+namespace GetStartedApp.Models;
+
 public class TimeLogItem
 {
     public string TaskName { get; set; } = string.Empty;

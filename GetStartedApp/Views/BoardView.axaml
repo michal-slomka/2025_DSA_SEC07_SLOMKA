@@ -17,7 +17,7 @@
     </Border>
 
     <!-- Top bar -->
-    <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right" Spacing="10">
+    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right" Spacing="10">
       <TextBox Width="200" Watermark="Search" />
       <Button Content="Create" />
     </StackPanel>

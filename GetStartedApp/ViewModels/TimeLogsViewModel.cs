@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using GetStartedApp.Models;
 
 namespace GetStartedApp.ViewModels;
 
