@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -26,7 +27,7 @@ public partial class TasksViewModel : ViewModelBase
     {
         FilteredTasks =
             new ObservableCollection<TaskItem>(_tasks.Where(task =>
-                task.Title.StartsWith(Filter, System.StringComparison.CurrentCultureIgnoreCase)));
+                task.Title.StartsWith(Filter, StringComparison.CurrentCultureIgnoreCase)));
     }
 
     private void LoadTasks()
