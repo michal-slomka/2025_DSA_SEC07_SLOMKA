@@ -3,12 +3,12 @@ using GetStartedApp.Models;
 
 namespace GetStartedApp.ViewModels;
 
-public class SecondViewModel : ViewModelBase
+public class BoardViewModel : ViewModelBase
 {
     public MainWindowViewModel? Main { get; }
 
     // ✅ Constructor used after login
-    public SecondViewModel(string username, string password)
+    public BoardViewModel(string username, string password)
     {
         Username = $"Username: {username}";
         Password = $"Password: {password}";
@@ -16,7 +16,7 @@ public class SecondViewModel : ViewModelBase
     }
 
     // ✅ Constructor used when navigating with command
-    public SecondViewModel(MainWindowViewModel main, string username, string password)
+    public BoardViewModel(MainWindowViewModel main, string username, string password)
         : this(username, password)
     {
         Main = main;

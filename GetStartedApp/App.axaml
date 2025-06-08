@@ -10,8 +10,8 @@
     <DataTemplate DataType="vm:LoginViewModel">
       <views:LoginView />
     </DataTemplate>
-    <DataTemplate DataType="vm:SecondViewModel">
-      <views:SecondView />
+    <DataTemplate DataType="vm:BoardViewModel">
+      <views:BoardView />
     </DataTemplate>
     <DataTemplate DataType="vm:TasksViewModel">
       <views:TasksView />
