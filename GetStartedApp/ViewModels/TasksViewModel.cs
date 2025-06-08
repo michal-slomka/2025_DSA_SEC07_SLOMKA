@@ -1,19 +1,32 @@
 using System.Collections.ObjectModel;
 using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using GetStartedApp.Models;
 
 namespace GetStartedApp.ViewModels;
 
-public class TasksViewModel : ViewModelBase
+public partial class TasksViewModel : ViewModelBase
 {
-    public ObservableCollection<TaskItem> Tasks { get; private set; } = [];
+    private ObservableCollection<TaskItem> _tasks = [];
+    [ObservableProperty] private ObservableCollection<TaskItem> _filteredTasks = [];
 
     public MainWindowViewModel Main { get; }
+
+    public string Filter { get; set; } = "";
 
     public TasksViewModel(MainWindowViewModel main)
     {
         Main = main;
         LoadTasks();
+    }
+
+    [RelayCommand]
+    private void FilterTasks()
+    {
+        FilteredTasks =
+            new ObservableCollection<TaskItem>(_tasks.Where(task =>
+                task.Title.StartsWith(Filter, System.StringComparison.CurrentCultureIgnoreCase)));
     }
 
     private void LoadTasks()
@@ -39,6 +52,7 @@ public class TasksViewModel : ViewModelBase
             AssignedTo = userIsAdmin ? t.AssignedEmployee.Name : "You"
         });
 
-        Tasks = new ObservableCollection<TaskItem>(taskItems);
+        _tasks = new ObservableCollection<TaskItem>(taskItems);
+        FilterTasks();
     }
 }
