@@ -25,6 +25,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty] private ViewModelBase _currentPage;
 
     public ProjectsViewModel? ProjectsView { get; set; }
+    public TasksViewModel? TasksView { get; set; }
 
     public int CurrentUserId { get; private set; }
 

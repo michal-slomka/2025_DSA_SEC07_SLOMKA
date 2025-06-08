@@ -30,13 +30,11 @@ public partial class TasksViewModel : ViewModelBase
                 task.Title.StartsWith(Filter, StringComparison.CurrentCultureIgnoreCase)));
     }
 
-    private void LoadTasks()
+    public void LoadTasks()
     {
         using var context = new TimeTrackingContext();
 
-        // all tasks
         var adminTasks = from task in context.Tasks select task;
-        // tasks assigned to the current user
         var otherTasks = from task in context.Tasks where task.AssignedEmployeeId == Main.CurrentUserId select task;
 
         var userIsAdmin = Main.CurrentUserType == "admin";
@@ -55,5 +53,11 @@ public partial class TasksViewModel : ViewModelBase
 
         _tasks = new ObservableCollection<TaskItem>(taskItems);
         FilterTasks();
+    }
+
+    [RelayCommand]
+    private void ShowCreateTaskView()
+    {
+        Main.CurrentPage = new CreateTaskViewModel(Main);
     }
 }

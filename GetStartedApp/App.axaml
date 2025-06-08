@@ -28,6 +28,9 @@
     <DataTemplate DataType="vm:CreateProjectViewModel">
       <views:CreateProjectView />
     </DataTemplate>
+     <DataTemplate DataType="vm:CreateTaskViewModel">
+        <views:CreateTaskView />
+    </DataTemplate>
 
   </Application.DataTemplates>
 
