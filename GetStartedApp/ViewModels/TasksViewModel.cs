@@ -25,11 +25,9 @@ public class TasksViewModel : ViewModelBase
         // tasks assigned to the current user
         var otherTasks = from task in context.Tasks where task.AssignedEmployeeId == Main.CurrentUserId select task;
 
-        var tasks = Main.CurrentUserType switch
-        {
-            "admin" => adminTasks,
-            _ => otherTasks
-        };
+        var userIsAdmin = Main.CurrentUserType == "admin";
+        
+        var tasks = userIsAdmin ? adminTasks : otherTasks;
 
         var taskItems = tasks.Select(t => new TaskItem
         {
@@ -38,7 +36,7 @@ public class TasksViewModel : ViewModelBase
             Deadline = t.EndTime.HasValue ? t.EndTime.Value.ToString("dd/MM/yyyy HH:mm:ss") : "No deadline",
             Project = $"In: {t.Project.Name}",
             TimeSpent = "",
-            AssignedTo = Main.CurrentUserType == "admin" ? t.AssignedEmployee.Name : "You"
+            AssignedTo = userIsAdmin ? t.AssignedEmployee.Name : "You"
         });
 
         Tasks = new ObservableCollection<TaskItem>(taskItems);
