@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GetStartedApp.Models;
 
@@ -8,13 +9,24 @@ namespace GetStartedApp.ViewModels;
 
 public partial class ProjectsViewModel : ViewModelBase
 {
-    public ObservableCollection<ProjectItem> Projects { get; private set; } = [];
+    private ObservableCollection<ProjectItem> _projects = [];
+    [ObservableProperty] private ObservableCollection<ProjectItem> _filteredProjects = [];
 
     public MainWindowViewModel Main { get; }
+
+    public string Filter { get; set; } = "";
 
     public ProjectsViewModel(MainWindowViewModel main)
     {
         Main = main;
+    }
+
+    [RelayCommand]
+    private void FilterProjects()
+    {
+        FilteredProjects =
+            new ObservableCollection<ProjectItem>(_projects.Where(project =>
+                project.Name.StartsWith(Filter, StringComparison.CurrentCultureIgnoreCase)));
     }
 
     public void LoadProjects()
@@ -55,7 +67,8 @@ public partial class ProjectsViewModel : ViewModelBase
                 )
         });
 
-        Projects = new ObservableCollection<ProjectItem>(projectItems);
+        _projects = new ObservableCollection<ProjectItem>(projectItems);
+        FilterProjects();
     }
 
     [RelayCommand]
