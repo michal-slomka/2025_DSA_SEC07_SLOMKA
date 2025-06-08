@@ -26,7 +26,7 @@ public class TasksViewModel : ViewModelBase
         var otherTasks = from task in context.Tasks where task.AssignedEmployeeId == Main.CurrentUserId select task;
 
         var userIsAdmin = Main.CurrentUserType == "admin";
-        
+
         var tasks = userIsAdmin ? adminTasks : otherTasks;
 
         var taskItems = tasks.Select(t => new TaskItem

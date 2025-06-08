@@ -15,7 +15,7 @@ public class ReportsViewModel : ViewModelBase
 
         Reports =
         [
-            new()
+            new TaskItem
             {
                 Title = "Weekly summary",
                 Description = "Compiled overall team performance",
@@ -25,7 +25,7 @@ public class ReportsViewModel : ViewModelBase
                 AssignedTo = "Eva"
             },
 
-            new()
+            new TaskItem
             {
                 Title = "Bug tracking report",
                 Description = "List of all unresolved bugs",
