@@ -16,7 +16,7 @@ public class SecondViewModel : ViewModelBase
     }
 
     // ✅ Constructor used when navigating with command
-    public SecondViewModel(string username, string password, MainWindowViewModel main)
+    public SecondViewModel(MainWindowViewModel main, string username, string password)
         : this(username, password)
     {
         Main = main;

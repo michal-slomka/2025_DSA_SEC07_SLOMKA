@@ -92,13 +92,13 @@
                      TextWrapping="Wrap" />
           <!-- Manager -->
           <TextBlock Text="{Binding Manager}" FontWeight="Bold" FontSize="13" Foreground="#6B7280" Margin="0,8,0,0" />
-          <!-- Assigned Users -->
+          <!-- Tasks -->
           <StackPanel Orientation="Horizontal" Spacing="6">
-            <TextBlock Text="Assigned:"
+            <TextBlock Text="Tasks:"
                        FontWeight="Bold"
                        FontSize="13"
                        Foreground="#6B7280" />
-            <ItemsControl ItemsSource="{Binding AssignedUsers}">
+            <ItemsControl ItemsSource="{Binding Tasks}">
               <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                   <StackPanel Orientation="Horizontal" Spacing="8" />

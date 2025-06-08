@@ -56,7 +56,7 @@ public partial class CreateProjectViewModel : ViewModelBase
         {
             Name = Name.Trim(),
             Description = Description.Trim(),
-            AssignedUsers = [] // TODO: ...
+            Tasks = [] // TODO: ...
         };
         // TODO: load all(?) views on startup
         _main.ProjectsView ??= new ProjectsViewModel(_main);

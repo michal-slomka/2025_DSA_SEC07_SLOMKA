@@ -21,21 +21,22 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty] private ViewModelBase _currentPage;
 
     public ProjectsViewModel? ProjectsView { get; set; }
+
+    // TODO: refactor
     public int CurrentUserId { get; private set; }
+
+    // public string CurrentUserName { get; private set; } = "";
+    public string CurrentUserType { get; private set; } = "";
 
     private readonly LoginViewModel _loginView = new();
 
     private void OnLoginSucceeded(string username, string password, string type, int userId)
     {
         CurrentUserId = userId;
-        if (type is "admin" or "employee")
-        {
-            CurrentPage = new SecondViewModel(username, password, this);
-        }
-        else
-        {
-            Console.WriteLine("Unknown user type");
-        }
+        // CurrentUserName = username;
+        CurrentUserType = type;
+
+        CurrentPage = new SecondViewModel(this, username, password);
     }
 
     // Navigation methods
@@ -48,7 +49,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void ShowBoard()
     {
-        CurrentPage = new SecondViewModel("admin", "admin", this);
+        CurrentPage = new SecondViewModel(this, "admin", "admin");
     }
 
     [RelayCommand]
@@ -56,13 +57,14 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         ProjectsView ??= new ProjectsViewModel(this);
 
+        ProjectsView.LoadProjects();
         CurrentPage = ProjectsView;
     }
 
     [RelayCommand]
     private void ShowTasks()
     {
-        CurrentPage = new TasksViewModel(this);
+        CurrentPage = new TasksViewModel(this, CurrentUserType);
     }
 
     [RelayCommand]
