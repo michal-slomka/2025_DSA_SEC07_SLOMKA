@@ -56,7 +56,7 @@ public partial class CreateProjectViewModel : ViewModelBase
         Name = string.Empty;
         Description = string.Empty;
         
-        // _main.ShowProjects();
+        _main.ShowProjects();
     }
 
     [RelayCommand]

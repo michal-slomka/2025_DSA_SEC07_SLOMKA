@@ -83,8 +83,6 @@ public partial class EditTaskViewModel : ViewModelBase
         }
         
         var task = context.Tasks.First(t => t.TaskId == SelectedTask.TaskId);
-        
-        Console.WriteLine($"{NewParentTask?.TaskId}");
 
         task.Name = NewName;
         task.Description = NewDescription;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GetStartedApp.Models;
@@ -9,6 +10,7 @@ namespace GetStartedApp.ViewModels;
 public partial class EditProjectViewModel : ViewModelBase
 {
     public ObservableCollection<Project> AvailableProjects { get; }
+    public ObservableCollection<User> AvailableManagers { get; }
 
     public Project? SelectedProject
     {
@@ -17,12 +19,14 @@ public partial class EditProjectViewModel : ViewModelBase
         {
             NewName = value?.Name ?? string.Empty;
             NewDescription = value?.Description ?? string.Empty;
+            SelectedManager = value?.Manager;
             SetProperty(ref field, value);
         }
     }
 
     [ObservableProperty] private string _newName = string.Empty;
     [ObservableProperty] private string _newDescription = string.Empty;
+    [ObservableProperty] private User? _selectedManager;
 
     private readonly MainWindowViewModel _main;
 
@@ -33,6 +37,9 @@ public partial class EditProjectViewModel : ViewModelBase
         using var context = new TimeTrackingContext();
 
         AvailableProjects = new ObservableCollection<Project>(context.Projects);
+        // janky views again
+        AvailableManagers =
+            new ObservableCollection<User>(from u in context.Users where u.Type == "project_manager" select u);
     }
 
     [RelayCommand]
@@ -44,15 +51,24 @@ public partial class EditProjectViewModel : ViewModelBase
             return;
         }
 
+        if (SelectedManager is null)
+        {
+            Console.WriteLine("No manager selected");
+            return;
+        }
+
         using var context = new TimeTrackingContext();
 
-        SelectedProject.Name = NewName;
-        SelectedProject.Description = NewDescription;
-        
-        context.Projects.Update(SelectedProject);
+        var project = context.Projects.First(p => p.ProjectId == SelectedProject.ProjectId);
+
+        project.Name = NewName;
+        project.Description = NewDescription;
+        project.ManagerId = SelectedManager.UserId;
+
+        context.Projects.Update(project);
         context.SaveChanges();
-        
-        _main.ShowProjects();
+
+        // _main.ShowProjects();
     }
 
     [RelayCommand]

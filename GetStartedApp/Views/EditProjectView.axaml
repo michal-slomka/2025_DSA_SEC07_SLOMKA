@@ -17,6 +17,10 @@
     </StackPanel>
     <TextBox Watermark="Name" Text="{Binding NewName}" />
     <TextBox Watermark="Description" Text="{Binding NewDescription}" AcceptsReturn="True" Height="60" />
+    <StackPanel Orientation="Horizontal">
+      <TextBlock Text="Manager" Margin="0,0,8,0" VerticalAlignment="Center" />
+      <ComboBox ItemsSource="{Binding AvailableManagers}" SelectedItem="{Binding SelectedManager}" />
+    </StackPanel>
     <StackPanel
       Orientation="Horizontal"
       Spacing="12"
@@ -40,6 +44,12 @@
 
   <UserControl.DataTemplates>
     <DataTemplate DataType="models:Project">
+      <TextBlock Text="{Binding Name}" />
+    </DataTemplate>
+    <DataTemplate DataType="models:ProjectManager">
+      <TextBlock Text="{Binding Name}" />
+    </DataTemplate>
+    <DataTemplate DataType="models:User">
       <TextBlock Text="{Binding Name}" />
     </DataTemplate>
   </UserControl.DataTemplates>
