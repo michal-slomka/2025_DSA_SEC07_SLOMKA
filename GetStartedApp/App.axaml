@@ -28,10 +28,12 @@
     <DataTemplate DataType="vm:CreateProjectViewModel">
       <views:CreateProjectView />
     </DataTemplate>
-     <DataTemplate DataType="vm:CreateTaskViewModel">
-        <views:CreateTaskView />
+    <DataTemplate DataType="vm:CreateTaskViewModel">
+      <views:CreateTaskView />
     </DataTemplate>
-
+    <DataTemplate DataType="vm:EditProjectViewModel">
+      <views:EditProjectView />
+    </DataTemplate>
   </Application.DataTemplates>
 
   <!-- 🎨 Global styling -->

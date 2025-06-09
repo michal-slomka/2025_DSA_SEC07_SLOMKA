@@ -81,4 +81,10 @@ public partial class ProjectsViewModel : ViewModelBase
     {
         Main.CurrentPage = new CreateProjectViewModel(Main);
     }
+
+    [RelayCommand]
+    private void EditProject()
+    {
+        Main.CurrentPage = new EditProjectViewModel(Main);
+    }
 }
