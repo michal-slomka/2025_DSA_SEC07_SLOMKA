@@ -38,7 +38,7 @@ public partial class MainWindowViewModel : ViewModelBase
         CurrentUserId = userId;
         CurrentUserType = type;
 
-        CurrentPage = new BoardViewModel(this, username, password);
+        ShowBoard();
     }
 
     // Navigation methods
@@ -51,7 +51,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void ShowBoard()
     {
-        CurrentPage = new BoardViewModel(this, "admin", "admin");
+        CurrentPage = new BoardViewModel(this);
     }
 
     [RelayCommand]

@@ -7,23 +7,11 @@ public class BoardViewModel : ViewModelBase
 {
     public MainWindowViewModel? Main { get; }
 
-    // ✅ Constructor used after login
-    public BoardViewModel(string username, string password)
-    {
-        Username = $"Username: {username}";
-        Password = $"Password: {password}";
-        LoadMockData();
-    }
-
-    // ✅ Constructor used when navigating with command
-    public BoardViewModel(MainWindowViewModel main, string username, string password)
-        : this(username, password)
+    public BoardViewModel(MainWindowViewModel main)
     {
         Main = main;
+        LoadMockData();
     }
-
-    public string Username { get; }
-    public string Password { get; }
 
     public ObservableCollection<TaskColumn> Columns { get; set; } = [];
 
