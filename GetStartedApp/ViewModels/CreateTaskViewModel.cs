@@ -66,7 +66,7 @@ public partial class CreateTaskViewModel : ViewModelBase
             parentTaskId = parentTask?.TaskId;
         }
 
-        var task = new Models.Task
+        var task = new Task
         {
             Name = Name.Trim(),
             Description = Description.Trim(),
@@ -80,13 +80,10 @@ public partial class CreateTaskViewModel : ViewModelBase
         context.Tasks.Add(task);
         context.SaveChanges();
 
-        _main.TasksView ??= new TasksViewModel(_main);
-        _main.TasksView.LoadTasks();
-
         Name = string.Empty;
         Description = string.Empty;
-
-        _main.CurrentPage = _main.TasksView;
+        
+        _main.ShowTasks();
     }
 
     [RelayCommand]

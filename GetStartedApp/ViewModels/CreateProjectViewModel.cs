@@ -58,14 +58,11 @@ public partial class CreateProjectViewModel : ViewModelBase
             Description = Description.Trim(),
             Tasks = [] // TODO: ...
         };
-        // TODO: load all(?) views on startup
-        _main.ProjectsView ??= new ProjectsViewModel(_main);
-        _main.ProjectsView.LoadProjects();
 
         Name = string.Empty;
         Description = string.Empty;
-
-        _main.CurrentPage = _main.ProjectsView;
+        
+        _main.ShowProjects();
     }
 
     [RelayCommand]

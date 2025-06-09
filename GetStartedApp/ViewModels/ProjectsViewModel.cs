@@ -19,7 +19,6 @@ public partial class ProjectsViewModel : ViewModelBase
     public ProjectsViewModel(MainWindowViewModel main)
     {
         Main = main;
-        LoadProjects();
     }
 
     [RelayCommand]

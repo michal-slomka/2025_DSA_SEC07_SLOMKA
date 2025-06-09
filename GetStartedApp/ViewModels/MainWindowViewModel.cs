@@ -55,16 +55,18 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void ShowProjects()
+    public void ShowProjects()
     {
         ProjectsView ??= new ProjectsViewModel(this);
+        ProjectsView.LoadProjects();
         CurrentPage = ProjectsView;
     }
 
     [RelayCommand]
-    private void ShowTasks()
+    public void ShowTasks()
     {
         TasksView ??= new TasksViewModel(this);
+        TasksView.LoadTasks();
         CurrentPage = TasksView;
     }
 

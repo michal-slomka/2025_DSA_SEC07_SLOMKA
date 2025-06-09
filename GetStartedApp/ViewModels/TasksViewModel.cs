@@ -19,7 +19,6 @@ public partial class TasksViewModel : ViewModelBase
     public TasksViewModel(MainWindowViewModel main)
     {
         Main = main;
-        LoadTasks();
     }
 
     [RelayCommand]
