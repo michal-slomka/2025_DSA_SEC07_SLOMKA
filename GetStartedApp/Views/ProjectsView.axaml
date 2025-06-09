@@ -20,7 +20,7 @@
                    FontWeight="Bold"
                    Foreground="#111827" />
         <TextBox Width="200"
-                 Watermark="🔍 Search" Text="{Binding Filter, Mode=OneWayToSource}" KeyDown="FilterTextBoxKeyDown" />
+                 Watermark="🔍 Search" Text="{Binding Filter}" KeyDown="FilterTextBoxKeyDown" />
         <Button Name="FilterButton" Content="Filter" Command="{Binding FilterProjectsCommand}" />
         <Button Content="➕ Create Project"
                 Background="#3B82F6"
