@@ -14,7 +14,7 @@ public partial class ProjectsViewModel : ViewModelBase
 
     public MainWindowViewModel Main { get; }
 
-    public string Filter { get; set; } = "";
+    public string Filter { get; set; } = string.Empty;
 
     public ProjectsViewModel(MainWindowViewModel main)
     {
@@ -73,7 +73,7 @@ public partial class ProjectsViewModel : ViewModelBase
 
     public void Reset()
     {
-        Filter = "";
+        Filter = string.Empty;
     }
 
     [RelayCommand]

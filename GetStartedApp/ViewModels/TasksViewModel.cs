@@ -14,7 +14,7 @@ public partial class TasksViewModel : ViewModelBase
 
     public MainWindowViewModel Main { get; }
 
-    public string Filter { get; set; } = "";
+    public string Filter { get; set; } = string.Empty;
 
     public TasksViewModel(MainWindowViewModel main)
     {
@@ -46,7 +46,7 @@ public partial class TasksViewModel : ViewModelBase
             Description = t.Description,
             Deadline = t.EndTime.HasValue ? t.EndTime.Value.ToString("dd/MM/yyyy HH:mm:ss") : "No deadline",
             Project = $"In: {t.Project.Name}",
-            TimeSpent = "",
+            TimeSpent = string.Empty,
             AssignedTo = userIsAdmin ? t.AssignedEmployee.Name : "You"
         });
 
@@ -56,7 +56,7 @@ public partial class TasksViewModel : ViewModelBase
     
     public void Reset()
     {
-        Filter = "";
+        Filter = string.Empty;
     }
 
     [RelayCommand]

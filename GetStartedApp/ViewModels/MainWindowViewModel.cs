@@ -29,7 +29,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public int CurrentUserId { get; private set; }
 
-    public string CurrentUserType { get; private set; } = "";
+    public string CurrentUserType { get; private set; } = string.Empty;
 
     private readonly LoginViewModel _loginView = new();
 

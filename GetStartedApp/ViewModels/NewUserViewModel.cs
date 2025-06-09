@@ -11,13 +11,13 @@ public partial class NewUserViewModel : ViewModelBase
     {
         get;
         set => SetProperty(ref field, value);
-    } = "";
+    } = string.Empty;
 
     public string Password
     {
         get;
         set => SetProperty(ref field, value);
-    } = "";
+    } = string.Empty;
 
     public string UserType
     {

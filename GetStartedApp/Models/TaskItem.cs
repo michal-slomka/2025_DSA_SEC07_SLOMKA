@@ -2,15 +2,15 @@ namespace GetStartedApp.Models;
 
 public class TaskItem
 {
-    public string Title { get; set; } = "";
-    public string Description { get; set; } = "";
-    public string Project { get; set; } = "";
-    public string TimeSpent { get; set; } = "";
-    public string Deadline { get; set; } = "";
-    public string AssignedTo { get; set; } = "";
+    public string Title { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public string Project { get; set; } = string.Empty;
+    public string TimeSpent { get; set; } = string.Empty;
+    public string Deadline { get; set; } = string.Empty;
+    public string AssignedTo { get; set; } = string.Empty;
 
     // 🔵 Optional enhancements for future use:
-    public string Status { get; set; } = ""; // To Do, In Progress, Done
-    public string Priority { get; set; } = ""; // Low, Medium, High
-    public string AvatarUrl { get; set; } = ""; // URL or path to user icon
+    public string Status { get; set; } = string.Empty; // To Do, In Progress, Done
+    public string Priority { get; set; } = string.Empty; // Low, Medium, High
+    public string AvatarUrl { get; set; } = string.Empty; // URL or path to user icon
 }
