@@ -12,17 +12,16 @@
     <StackPanel Margin="24" Spacing="16">
       <StackPanel Orientation="Horizontal" Spacing="16">
         <TextBlock Text="Tasks" FontSize="28" FontWeight="Bold" Foreground="#111827" />
-        <Button
-          Content="Create Task"
-          Command="{Binding ShowCreateTaskViewCommand}"
-          Background="#2563EB"
-          Foreground="White"
-          FontWeight="Bold"
-          Padding="12,6"
-          CornerRadius="4" />
         <TextBox Width="200" Watermark="🔍 Search" Text="{Binding Filter}"
                  KeyDown="FilterTextBoxKeyDown" />
         <Button Name="FilterButton" Content="Filter" Command="{Binding FilterTasksCommand}" />
+        <Button
+          Content="Create Task"
+          Command="{Binding ShowCreateTaskViewCommand}"
+          Background="#3B82F6"
+          Foreground="White"
+          Padding="8,4"
+          CornerRadius="4" />
       </StackPanel>
 
       <ScrollViewer VerticalScrollBarVisibility="Auto">
