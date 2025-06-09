@@ -17,6 +17,51 @@
     </StackPanel>
     <TextBox Watermark="Name" Text="{Binding NewName}" />
     <TextBox Watermark="Description" Text="{Binding NewDescription}" AcceptsReturn="True" Height="60" />
+    
+    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+      <TextBlock Text="Employee:" VerticalAlignment="Center" />
+      <ComboBox
+        ItemsSource="{Binding AvailableEmployees}"
+        SelectedItem="{Binding NewEmployee}"
+        Width="200"
+        PlaceholderText="Select employee" />
+    </StackPanel>
+
+    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+      <TextBlock Text="Project:" VerticalAlignment="Center" />
+      <ComboBox
+        ItemsSource="{Binding AvailableProjects}"
+        SelectedItem="{Binding NewProject}"
+        Width="200"
+        PlaceholderText="Select project" />
+    </StackPanel>
+
+    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+      <TextBlock Text="Parent Task:" VerticalAlignment="Center" />
+      <ComboBox
+        ItemsSource="{Binding AvailableParentTasks}"
+        SelectedItem="{Binding NewParentTask}"
+        Width="200"
+        PlaceholderText="Optional parent task" />
+    </StackPanel>
+
+    <StackPanel Orientation="Horizontal" Spacing="16">
+      <StackPanel>
+        <TextBlock Text="Start time (optional)" Margin="0,0,0,4" />
+        <DatePicker
+          SelectedDate="{Binding NewStartTime}" />
+      </StackPanel>
+      <StackPanel>
+        <TextBlock Text="End time (optional)" Margin="0,0,0,4" />
+        <DatePicker
+          SelectedDate="{Binding NewEndTime}" />
+      </StackPanel>
+    </StackPanel>
+
+    <TextBox
+      Watermark="Type (optional)"
+      Text="{Binding NewType}" />
+    
     <StackPanel
       Orientation="Horizontal"
       Spacing="12"
@@ -40,6 +85,15 @@
 
   <UserControl.DataTemplates>
     <DataTemplate DataType="models:Task">
+      <TextBlock Text="{Binding Name}" />
+    </DataTemplate>
+    <DataTemplate DataType="models:Project">
+      <TextBlock Text="{Binding Name}" />
+    </DataTemplate>
+    <DataTemplate DataType="models:Employee">
+      <TextBlock Text="{Binding Name}" />
+    </DataTemplate>
+    <DataTemplate DataType="models:User">
       <TextBlock Text="{Binding Name}" />
     </DataTemplate>
   </UserControl.DataTemplates>
