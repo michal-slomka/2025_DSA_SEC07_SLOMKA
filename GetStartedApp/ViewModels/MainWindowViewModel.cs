@@ -24,11 +24,13 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [ObservableProperty] private ViewModelBase _currentPage;
 
-    public ProjectsViewModel? ProjectsView { get; set; }
-    public TasksViewModel? TasksView { get; set; }
+    public BoardViewModel? BoardView { get; private set; }
+    public ProjectsViewModel? ProjectsView { get; private set; }
+    public TasksViewModel? TasksView { get; private set; }
+    public TimeLogsViewModel? TimeLogsView { get; private set; }
+    public ReportsViewModel? ReportsView { get; private set; }
 
     public int CurrentUserId { get; private set; }
-
     public string CurrentUserType { get; private set; } = string.Empty;
 
     private readonly LoginViewModel _loginView = new();
@@ -53,7 +55,8 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void ShowBoard()
     {
-        CurrentPage = new BoardViewModel(this);
+        BoardView ??= new BoardViewModel(this);
+        CurrentPage = BoardView;
     }
 
     [RelayCommand]
@@ -75,12 +78,14 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void ShowTimeLogs()
     {
-        CurrentPage = new TimeLogsViewModel(this);
+        TimeLogsView ??= new TimeLogsViewModel(this);
+        CurrentPage = TimeLogsView;
     }
 
     [RelayCommand]
     private void ShowReports()
     {
-        CurrentPage = new ReportsViewModel(this);
+        ReportsView ??= new ReportsViewModel(this);
+        CurrentPage = ReportsView;
     }
 }
