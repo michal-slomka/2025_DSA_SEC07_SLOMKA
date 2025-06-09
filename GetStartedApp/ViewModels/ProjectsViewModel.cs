@@ -71,6 +71,11 @@ public partial class ProjectsViewModel : ViewModelBase
         FilterProjects();
     }
 
+    public void Reset()
+    {
+        Filter = "";
+    }
+
     [RelayCommand]
     private void OpenCreateProject()
     {

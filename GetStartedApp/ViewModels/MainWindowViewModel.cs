@@ -46,6 +46,8 @@ public partial class MainWindowViewModel : ViewModelBase
     private void LogOut()
     {
         CurrentPage = _loginView;
+        ProjectsView?.Reset();
+        TasksView?.Reset();
     }
 
     [RelayCommand]

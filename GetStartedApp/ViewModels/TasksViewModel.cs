@@ -53,6 +53,11 @@ public partial class TasksViewModel : ViewModelBase
         _tasks = new ObservableCollection<TaskItem>(taskItems);
         FilterTasks();
     }
+    
+    public void Reset()
+    {
+        Filter = "";
+    }
 
     [RelayCommand]
     private void ShowCreateTaskView()
