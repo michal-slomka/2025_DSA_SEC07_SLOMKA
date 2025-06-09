@@ -49,25 +49,19 @@ public partial class CreateProjectViewModel : ViewModelBase
             Description = Description,
             ManagerId = manager.ProjectManagerId
         };
+        
         context.Projects.Add(project);
         context.SaveChanges();
-
-        var p = new ProjectItem
-        {
-            Name = Name.Trim(),
-            Description = Description.Trim(),
-            Tasks = [] // TODO: ...
-        };
 
         Name = string.Empty;
         Description = string.Empty;
         
-        _main.ShowProjects();
+        // _main.ShowProjects();
     }
 
     [RelayCommand]
     private void Cancel()
     {
-        _main.CurrentPage = _main.ProjectsView!;
+        _main.ShowProjects();
     }
 }
