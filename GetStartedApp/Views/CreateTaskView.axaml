@@ -2,6 +2,7 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:vm="using:GetStartedApp.ViewModels"
+  xmlns:models="using:GetStartedApp.Models"
   x:Class="GetStartedApp.Views.CreateTaskView"
   x:DataType="vm:CreateTaskViewModel"
   Background="#F9FAFB">
@@ -87,4 +88,16 @@
         CornerRadius="4" />
     </StackPanel>
   </StackPanel>
+
+  <UserControl.DataTemplates>
+    <DataTemplate DataType="models:Task">
+      <TextBlock Text="{Binding Name}" />
+    </DataTemplate>
+    <DataTemplate DataType="models:Project">
+      <TextBlock Text="{Binding Name}" />
+    </DataTemplate>
+    <DataTemplate DataType="models:Employee">
+      <TextBlock Text="{Binding Name}" />
+    </DataTemplate>
+  </UserControl.DataTemplates>
 </UserControl>
