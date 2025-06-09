@@ -64,4 +64,10 @@ public partial class TasksViewModel : ViewModelBase
     {
         Main.CurrentPage = new CreateTaskViewModel(Main);
     }
+    
+    [RelayCommand]
+    private void EditTask()
+    {
+        Main.CurrentPage = new EditTaskViewModel(Main);
+    }
 }

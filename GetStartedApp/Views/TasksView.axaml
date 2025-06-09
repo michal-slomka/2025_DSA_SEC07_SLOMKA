@@ -22,6 +22,7 @@
           Foreground="White"
           Padding="8,4"
           CornerRadius="4" />
+        <Button Content="Edit" Command="{Binding EditTaskCommand}"/>
       </StackPanel>
 
       <ScrollViewer VerticalScrollBarVisibility="Auto">

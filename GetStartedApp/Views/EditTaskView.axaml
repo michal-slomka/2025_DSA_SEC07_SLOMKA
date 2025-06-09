@@ -1,0 +1,46 @@
+<UserControl
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:vm="using:GetStartedApp.ViewModels"
+  xmlns:models="using:GetStartedApp.Models"
+  x:Class="GetStartedApp.Views.EditTaskView"
+  x:DataType="vm:EditTaskViewModel"
+  Background="#F9FAFB">
+  <StackPanel Margin="24" Spacing="16" HorizontalAlignment="Left" Width="400">
+    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+      <TextBlock Text="Task:" VerticalAlignment="Center" />
+      <ComboBox
+        ItemsSource="{Binding AvailableTasks}"
+        SelectedItem="{Binding SelectedTask}"
+        Width="200"
+        PlaceholderText="Select task" />
+    </StackPanel>
+    <TextBox Watermark="Name" Text="{Binding NewName}" />
+    <TextBox Watermark="Description" Text="{Binding NewDescription}" AcceptsReturn="True" Height="60" />
+    <StackPanel
+      Orientation="Horizontal"
+      Spacing="12"
+      Margin="0,20,0,0">
+      <Button
+        Content="Save"
+        Command="{Binding SaveCommand}"
+        Background="#10B981"
+        Foreground="White"
+        Padding="12,6"
+        CornerRadius="4" />
+      <Button
+        Content="Cancel"
+        Command="{Binding CancelCommand}"
+        Background="#E5E7EB"
+        Foreground="#374151"
+        Padding="12,6"
+        CornerRadius="4" />
+    </StackPanel>
+  </StackPanel>
+
+  <UserControl.DataTemplates>
+    <DataTemplate DataType="models:Task">
+      <TextBlock Text="{Binding Name}" />
+    </DataTemplate>
+  </UserControl.DataTemplates>
+</UserControl>

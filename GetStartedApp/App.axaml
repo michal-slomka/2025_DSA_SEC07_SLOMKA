@@ -34,6 +34,9 @@
     <DataTemplate DataType="vm:EditProjectViewModel">
       <views:EditProjectView />
     </DataTemplate>
+    <DataTemplate DataType="vm:EditTaskViewModel">
+      <views:EditTaskView />
+    </DataTemplate>
   </Application.DataTemplates>
 
   <!-- 🎨 Global styling -->
