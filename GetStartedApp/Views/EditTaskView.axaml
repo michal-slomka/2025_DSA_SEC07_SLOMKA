@@ -17,7 +17,7 @@
     </StackPanel>
     <TextBox Watermark="Name" Text="{Binding NewName}" />
     <TextBox Watermark="Description" Text="{Binding NewDescription}" AcceptsReturn="True" Height="60" />
-    
+
     <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
       <TextBlock Text="Employee:" VerticalAlignment="Center" />
       <ComboBox
@@ -61,7 +61,7 @@
     <TextBox
       Watermark="Type (optional)"
       Text="{Binding NewType}" />
-    
+
     <StackPanel
       Orientation="Horizontal"
       Spacing="12"

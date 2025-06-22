@@ -43,7 +43,7 @@ public partial class TasksViewModel : ViewModelBase
         _tasks = new ObservableCollection<Task>(tasks);
         FilterTasks();
     }
-    
+
     public void Reset()
     {
         Filter = string.Empty;
@@ -60,7 +60,7 @@ public partial class TasksViewModel : ViewModelBase
     {
         Main.CurrentPage = new LogTimeViewModel(Main);
     }
-    
+
     [RelayCommand]
     private void EditTask()
     {

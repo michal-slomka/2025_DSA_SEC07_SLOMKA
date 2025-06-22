@@ -4,7 +4,6 @@
              xmlns:models="using:GetStartedApp.Models"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="clr-namespace:GetStartedApp.Views"
              mc:Ignorable="d"
              x:Class="GetStartedApp.Views.LogTimeView"
              x:DataType="vm:LogTimeViewModel"
@@ -25,7 +24,7 @@
       <NumericUpDown Value="{Binding Time}" Minimum="0" FormatString="0" Width="150" />
       <TextBlock Text="minutes." VerticalAlignment="Center" />
     </StackPanel>
-    
+
     <StackPanel
       Orientation="Horizontal"
       Spacing="12"

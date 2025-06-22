@@ -28,7 +28,7 @@
                 Padding="8,4"
                 CornerRadius="4"
                 Command="{Binding OpenCreateProjectCommand}" />
-        <Button Content="Edit" Command="{Binding EditProjectCommand}"/>
+        <Button Content="Edit" Command="{Binding EditProjectCommand}" />
       </StackPanel>
 
       <!-- Projects List -->

@@ -10,7 +10,7 @@ namespace GetStartedApp.ViewModels;
 public partial class LogTimeViewModel : ViewModelBase
 {
     public ObservableCollection<Task> AvailableTasks { get; }
-    
+
     public Task? SelectedTask
     {
         get;
@@ -23,11 +23,11 @@ public partial class LogTimeViewModel : ViewModelBase
     public LogTimeViewModel(MainWindowViewModel main)
     {
         _main = main;
-        
+
         using var context = new TimeTrackingContext();
 
         var availableTasks = from t in context.Tasks where t.AssignedEmployeeId == _main.CurrentUserId select t;
-        
+
         AvailableTasks = new ObservableCollection<Task>(availableTasks);
     }
 
@@ -51,15 +51,15 @@ public partial class LogTimeViewModel : ViewModelBase
         //     Console.WriteLine("Time is empty");
         //     return;
         // }
-        
+
         using var context = new TimeTrackingContext();
 
         var timeLog = new TimeLog
         {
             TaskId = SelectedTask!.TaskId,
             Date = Date.DateTime,
-            TimeSpent = new TimeSpan(0, (int)Time, 0) ,
-            IsApproved = 0,
+            TimeSpent = new TimeSpan(0, (int)Time, 0),
+            IsApproved = 0
         };
 
         context.TimeLogs.Add(timeLog);

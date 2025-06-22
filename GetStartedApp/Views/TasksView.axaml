@@ -22,7 +22,7 @@
           Foreground="White"
           Padding="8,4"
           CornerRadius="4" />
-        <Button Content="Edit" Command="{Binding EditTaskCommand}"/>
+        <Button Content="Edit" Command="{Binding EditTaskCommand}" />
         <Button Content="Log time"
                 Command="{Binding ShowLogTimeViewCommand}"
                 Background="#60A5FA"
@@ -51,7 +51,8 @@
                   <StackPanel Spacing="8">
                     <TextBlock Text="Status: TO DO" FontSize="12" Foreground="#6B7280" />
                     <TextBlock Text="Time spent: {Binding TimeSpent}" FontSize="12" Foreground="#6B7280" />
-                    <TextBlock Text="{Binding EndTime, StringFormat=Deadline: {0:yyyy/MM/dd}}" FontSize="12" Foreground="#6B7280" />
+                    <TextBlock Text="{Binding EndTime, StringFormat=Deadline: {0:yyyy/MM/dd}}" FontSize="12"
+                               Foreground="#6B7280" />
 
                     <StackPanel Orientation="Horizontal" Spacing="6">
                       <TextBlock Text="Assigned:" FontSize="12" Foreground="#6B7280" />

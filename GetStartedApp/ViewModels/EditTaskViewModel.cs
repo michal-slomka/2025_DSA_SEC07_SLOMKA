@@ -81,7 +81,7 @@ public partial class EditTaskViewModel : ViewModelBase
             Console.WriteLine($"The task must have an employee and project assigned");
             return;
         }
-        
+
         var task = context.Tasks.First(t => t.TaskId == SelectedTask.TaskId);
 
         task.Name = NewName;
@@ -92,7 +92,7 @@ public partial class EditTaskViewModel : ViewModelBase
         task.StartTime = NewStartTime?.DateTime ?? DateTime.Now;
         task.EndTime = NewEndTime?.DateTime;
         task.Type = NewType ?? "";
-        
+
         context.Tasks.Update(task);
         context.SaveChanges();
 

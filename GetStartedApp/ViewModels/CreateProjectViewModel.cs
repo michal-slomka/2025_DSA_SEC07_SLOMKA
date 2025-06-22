@@ -49,13 +49,13 @@ public partial class CreateProjectViewModel : ViewModelBase
             Description = Description,
             ManagerId = manager.ProjectManagerId
         };
-        
+
         context.Projects.Add(project);
         context.SaveChanges();
 
         Name = string.Empty;
         Description = string.Empty;
-        
+
         _main.ShowProjects();
     }
 
