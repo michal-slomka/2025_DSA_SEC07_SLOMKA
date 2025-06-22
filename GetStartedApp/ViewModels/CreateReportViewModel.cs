@@ -27,42 +27,6 @@ public partial class CreateReportViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void Save()
-    {
-        if (string.IsNullOrWhiteSpace(Title) || string.IsNullOrWhiteSpace(SelectedProject))
-            return;
-        using var context = new TimeTrackingContext();
-        var project = context.Projects.FirstOrDefault(p => p.Name == SelectedProject);
-        if (project == null) return;
-        var tasks = context.Tasks.Where(t => t.ProjectId == project.ProjectId).ToList();
-        var employees = context.Employees.ToList();
-        var timeLogs = context.TimeLogs.ToList();
-        var rows = from t in tasks
-                   join e in employees on t.AssignedEmployeeId equals e.EmployeeId
-                   join tl in timeLogs on t.TaskId equals tl.TaskId into timeLogsGroup
-                   from tl in timeLogsGroup.DefaultIfEmpty()
-                   group tl by new { t.TaskId, e.EmployeeId, EmployeeName = e.Name, TaskName = t.Name } into g
-                   select new ReportRow
-                   {
-                       Employee = g.Key.EmployeeName,
-                       Task = g.Key.TaskName,
-                       TimeSpent = g.Where(x => x != null).Aggregate(TimeSpan.Zero, (acc, x) => acc + (x?.TimeSpent ?? TimeSpan.Zero)).TotalHours
-                   };
-        var safeTitle = string.Join("_", Title.Split(Path.GetInvalidFileNameChars()));
-        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-        var path = Path.Combine(desktop, $"Report_{safeTitle}_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
-        using var writer = new StreamWriter(path);
-        writer.WriteLine($"Raport;{Title}");
-        writer.WriteLine($"Description;{Description}");
-        writer.WriteLine($"Project;{SelectedProject}");
-        writer.WriteLine();
-        writer.WriteLine("Employee;Task;TimeSpent(hours)");
-        foreach (var row in rows)
-            writer.WriteLine($"{row.Employee};{row.Task};{row.TimeSpent}");
-        _onReportCreated?.Invoke();
-    }
-
-    [RelayCommand]
     private void Cancel()
     {
         _onReportCreated?.Invoke();
