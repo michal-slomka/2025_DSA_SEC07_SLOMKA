@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:GetStartedApp.ViewModels"
+             x:Class="GetStartedApp.Views.CreateReportView"
+             x:DataType="vm:CreateReportViewModel"
+             Background="#F9FAFB">
+  <StackPanel Margin="24" Spacing="16">
+    <TextBlock Text="Create Report" FontSize="24" FontWeight="Bold" />
+    <TextBox Watermark="Report title" Text="{Binding Title, Mode=TwoWay}" />
+    <TextBox Watermark="Description" Text="{Binding Description, Mode=TwoWay}" />
+    <ComboBox ItemsSource="{Binding AvailableProjects}" SelectedItem="{Binding SelectedProject, Mode=TwoWay}" />
+    <StackPanel Orientation="Horizontal" Spacing="8">
+      <Button Content="Save" Click="SaveButton_Click" />
+      <Button Content="Cancel" Command="{Binding CancelCommand}" />
+    </StackPanel>
+  </StackPanel>
+</UserControl>

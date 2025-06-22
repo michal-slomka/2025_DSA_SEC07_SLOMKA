@@ -40,6 +40,9 @@
     <DataTemplate DataType="vm:LogTimeViewModel">
       <views:LogTimeView />
     </DataTemplate>
+    <DataTemplate DataType="vm:CreateReportViewModel">
+      <views:CreateReportView />
+    </DataTemplate>
   </Application.DataTemplates>
 
   <!-- 🎨 Global styling -->

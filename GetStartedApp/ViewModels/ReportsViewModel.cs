@@ -1,9 +1,10 @@
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.Input;
 using GetStartedApp.Models;
 
 namespace GetStartedApp.ViewModels;
 
-public class ReportsViewModel : ViewModelBase
+public partial class ReportsViewModel : ViewModelBase
 {
     public MainWindowViewModel Main { get; }
 
@@ -35,5 +36,11 @@ public class ReportsViewModel : ViewModelBase
                 AssignedTo = "Liam"
             }
         ];
+    }
+
+    [RelayCommand]
+    private void OpenCreateReport()
+    {
+        Main.CurrentPage = new CreateReportViewModel(this, () => Main.CurrentPage = this);
     }
 }
