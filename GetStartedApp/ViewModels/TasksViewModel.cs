@@ -9,8 +9,8 @@ namespace GetStartedApp.ViewModels;
 
 public partial class TasksViewModel : ViewModelBase
 {
-    private ObservableCollection<TaskItem> _tasks = [];
-    [ObservableProperty] private ObservableCollection<TaskItem> _filteredTasks = [];
+    private ObservableCollection<Task> _tasks = [];
+    [ObservableProperty] private ObservableCollection<Task> _filteredTasks = [];
 
     public MainWindowViewModel Main { get; }
 
@@ -25,8 +25,8 @@ public partial class TasksViewModel : ViewModelBase
     private void FilterTasks()
     {
         FilteredTasks =
-            new ObservableCollection<TaskItem>(_tasks.Where(task =>
-                task.Title.StartsWith(Filter, StringComparison.CurrentCultureIgnoreCase)));
+            new ObservableCollection<Task>(_tasks.Where(task =>
+                task.Name.StartsWith(Filter, StringComparison.CurrentCultureIgnoreCase)));
     }
 
     public void LoadTasks()
@@ -40,17 +40,7 @@ public partial class TasksViewModel : ViewModelBase
 
         var tasks = userIsAdmin ? adminTasks : otherTasks;
 
-        var taskItems = tasks.Select(t => new TaskItem
-        {
-            Title = t.Name,
-            Description = t.Description,
-            Deadline = t.EndTime.HasValue ? t.EndTime.Value.ToString("dd/MM/yyyy HH:mm:ss") : "No deadline",
-            Project = $"In: {t.Project.Name}",
-            TimeSpent = string.Empty,
-            AssignedTo = userIsAdmin ? t.AssignedEmployee.Name : "You"
-        });
-
-        _tasks = new ObservableCollection<TaskItem>(taskItems);
+        _tasks = new ObservableCollection<Task>(tasks);
         FilterTasks();
     }
     
