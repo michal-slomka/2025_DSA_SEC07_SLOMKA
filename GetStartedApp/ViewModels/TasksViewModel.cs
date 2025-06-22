@@ -54,6 +54,12 @@ public partial class TasksViewModel : ViewModelBase
     {
         Main.CurrentPage = new CreateTaskViewModel(Main);
     }
+
+    [RelayCommand]
+    private void ShowLogTimeView()
+    {
+        Main.CurrentPage = new LogTimeViewModel(Main);
+    }
     
     [RelayCommand]
     private void EditTask()

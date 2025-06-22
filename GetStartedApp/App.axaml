@@ -37,6 +37,9 @@
     <DataTemplate DataType="vm:EditTaskViewModel">
       <views:EditTaskView />
     </DataTemplate>
+    <DataTemplate DataType="vm:LogTimeViewModel">
+      <views:LogTimeView />
+    </DataTemplate>
   </Application.DataTemplates>
 
   <!-- 🎨 Global styling -->
