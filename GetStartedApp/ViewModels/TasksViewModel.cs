@@ -4,6 +4,7 @@ using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GetStartedApp.Models;
+using Microsoft.EntityFrameworkCore; 
 
 namespace GetStartedApp.ViewModels;
 
@@ -33,8 +34,12 @@ public partial class TasksViewModel : ViewModelBase
     {
         using var context = new TimeTrackingContext();
 
-        var adminTasks = from task in context.Tasks select task;
-        var otherTasks = from task in context.Tasks where task.AssignedEmployeeId == Main.CurrentUserId select task;
+        var adminTasks = context.Tasks
+            .Include(t => t.AssignedEmployee); 
+
+        var otherTasks = context.Tasks
+            .Where(task => task.AssignedEmployeeId == Main.CurrentUserId)
+            .Include(t => t.AssignedEmployee); 
 
         var userIsAdmin = Main.CurrentUserType == "admin";
 

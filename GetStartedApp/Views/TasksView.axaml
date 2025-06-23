@@ -53,11 +53,10 @@
                     <TextBlock Text="Time spent: {Binding TimeSpent}" FontSize="12" Foreground="#6B7280" />
                     <TextBlock Text="{Binding EndTime, StringFormat=Deadline: {0:dd/MM/yyyy}}" FontSize="12"
                                Foreground="#6B7280" />
-
                     <StackPanel Orientation="Horizontal" Spacing="6">
-                      <TextBlock Text="Assigned:" FontSize="12" Foreground="#6B7280" />
-                      <Ellipse Width="16" Height="16" Fill="#EC4899" />
-                      <TextBlock Text="{Binding AssignedEmployee}" FontSize="12" Foreground="#111827" />
+                      <TextBlock Text="Assigned to:" FontSize="12" Foreground="#6B7280" />
+                      
+                      <TextBlock Text="{Binding AssignedEmployee.Name}" FontSize="12" Foreground="#111827" />
                     </StackPanel>
 
                   </StackPanel>
