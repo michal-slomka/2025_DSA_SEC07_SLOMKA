@@ -36,6 +36,11 @@ public partial class EditTaskViewModel : ViewModelBase
             NewStartTime = value?.StartTime;
             NewEndTime = value?.EndTime;
             NewType = value?.Type;
+            
+            if (value?.ParentTask is not null)
+                NewParentTask = AvailableParentTasks.FirstOrDefault(t => t.TaskId == value.ParentTask.TaskId);
+            else
+                NewParentTask = AvailableParentTasks.FirstOrDefault(t => t.TaskId == -1);
 
             SetProperty(ref field, value);
         }
