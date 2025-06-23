@@ -35,5 +35,8 @@
         <Compile Update="Views\Sidebar.xaml.cs">
             <DependentUpon>Sidebar.axaml</DependentUpon>
         </Compile>
+        <Compile Update="Views\CreateReportView.axaml.cs">
+          <DependentUpon>CreateReportView.axaml</DependentUpon>
+        </Compile>
     </ItemGroup>
 </Project>
