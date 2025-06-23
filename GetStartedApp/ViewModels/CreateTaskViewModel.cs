@@ -34,7 +34,10 @@ public partial class CreateTaskViewModel : ViewModelBase
 
         AvailableEmployees = new ObservableCollection<Employee>(context.Employees);
         AvailableProjects = new ObservableCollection<Project>(context.Projects);
-        AvailableParentTasks = new ObservableCollection<Task>(context.Tasks);
+
+        var parentTasks = context.Tasks.ToList();
+        parentTasks.Insert(0, new Task { Name = "No Parent Task", TaskId = -1 });
+        AvailableParentTasks = new ObservableCollection<Task>(parentTasks);
     }
 
     [RelayCommand]
@@ -58,8 +61,9 @@ public partial class CreateTaskViewModel : ViewModelBase
             Description = Description.Trim(),
             AssignedEmployeeId = SelectedEmployee.EmployeeId,
             ProjectId = SelectedProject.ProjectId,
-            ParentTaskId = SelectedParentTask?.ProjectId,
-            StartTime = StartTime?.DateTime ?? DateTime.Now, // Konwersja DateTimeOffset? → DateTime
+            // Jeśli wybrano "(brak parent taska)", nie ustawiaj ParentTaskId
+            ParentTaskId = (SelectedParentTask != null && SelectedParentTask.TaskId != -1) ? SelectedParentTask.ProjectId : null,
+            StartTime = StartTime?.DateTime ?? DateTime.Now,
             EndTime = EndTime?.DateTime,
             Type = Type ?? ""
         };
