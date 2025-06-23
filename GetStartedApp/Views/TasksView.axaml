@@ -33,7 +33,7 @@
                 CornerRadius="4" />
       </StackPanel>
 
-      <ScrollViewer VerticalScrollBarVisibility="Auto">
+      <ScrollViewer VerticalScrollBarVisibility="Auto" Height="700">
         <ItemsControl ItemsSource="{Binding FilteredTasks}">
           <ItemsControl.ItemTemplate>
             <DataTemplate>

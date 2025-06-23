@@ -32,7 +32,7 @@
       </StackPanel>
 
       <!-- Projects List -->
-      <ScrollViewer VerticalScrollBarVisibility="Auto">
+      <ScrollViewer VerticalScrollBarVisibility="Auto" Height="700">
         <ItemsControl ItemsSource="{Binding FilteredProjects}" />
       </ScrollViewer>
 
