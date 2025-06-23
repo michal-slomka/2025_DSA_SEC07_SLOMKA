@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Avalonia.Media;
 using GetStartedApp.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,11 +15,33 @@ public class TimeLogsViewModel : ViewModelBase
 
         using var context = new TimeTrackingContext();
 
-        var projects = (from p in context.Projects.Include(p => p.Tasks).ThenInclude(task => task.TimeLogs) select p);
-        ProjectItems = new ObservableCollection<Project>(projects);
+        var projects = from p in context.Projects
+                .Include(p => p.Tasks)
+                .ThenInclude(task => task.TimeLogs)
+                .Include(p => p.Tasks)
+                .ThenInclude(task => task.AssignedEmployee)
+            select p;
+        var projectItems = projects.Select(project => new TLProjectItem
+        {
+            Project = project,
+            TaskItems = project.Tasks.Select(task => new TLTaskItem
+            {
+                Task = task,
+                TimeLogItems = task.TimeLogs.Select(timeLog => new TLTimeLogItem
+                {
+                    TimeLog = timeLog,
+                    EmployeeName = task.AssignedEmployee.Name,
+                    Color = timeLog.IsApproved == 1
+                        ? Color.FromArgb(0x33, 0x00, 0xFF, 0x00).ToString()
+                        : Color.FromArgb(0x33, 0xFF, 0x00, 0x00).ToString(),
+                }).ToList()
+            }).ToList(),
+        });
+
+        ProjectItems = new ObservableCollection<TLProjectItem>(projectItems);
     }
 
     public MainWindowViewModel Main { get; }
 
-    public ObservableCollection<Project> ProjectItems { get; set; }
+    public ObservableCollection<TLProjectItem> ProjectItems { get; set; }
 }

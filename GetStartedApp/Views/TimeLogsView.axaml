@@ -23,50 +23,41 @@
   </DockPanel>
 
   <UserControl.DataTemplates>
-    <DataTemplate DataType="models:Project">
-      <!-- <Border Background="IndianRed" Padding="4"> -->
+    <DataTemplate DataType="models:TLProjectItem">
       <Border Background="White"
               CornerRadius="8"
               Padding="4"
               Margin="0,12,0,0"
               BorderBrush="#E5E7EB"
               BorderThickness="1">
-        <Expander Header="{Binding Name}" Width="700" IsExpanded="False" ExpandDirection="Down">
-          <ItemsControl ItemsSource="{Binding Tasks}" />
+        <Expander Header="{Binding Project.Name}" HorizontalAlignment="Stretch">
+          <ItemsControl ItemsSource="{Binding TaskItems}" />
         </Expander>
-        <!-- <StackPanel> -->
-        <!--   <TextBlock Text="{Binding Name}" /> -->
-        <!--   <ItemsControl ItemsSource="{Binding Tasks}" /> -->
-        <!-- </StackPanel> -->
       </Border>
     </DataTemplate>
-    <DataTemplate DataType="models:Task">
-      <!-- <Border Background="LightSkyBlue" Padding="4"> -->
+    <DataTemplate DataType="models:TLTaskItem">
       <Border Background="#F3F4F6"
               CornerRadius="8"
               Padding="4"
               Margin="16,12,0,0"
               BorderBrush="#E5E7EB"
               BorderThickness="1">
-        <Expander Header="{Binding Name}" IsExpanded="False" ExpandDirection="Down">
-          <ItemsControl ItemsSource="{Binding TimeLogs}" />
+        <Expander Header="{Binding Task.Name}" HorizontalAlignment="Stretch">
+          <ItemsControl ItemsSource="{Binding TimeLogItems}" />
         </Expander>
-        <!-- <StackPanel> -->
-        <!--   <TextBlock Text="{Binding Name}" /> -->
-        <!--   <ItemsControl ItemsSource="{Binding TimeLogs}" /> -->
-        <!-- </StackPanel> -->
       </Border>
     </DataTemplate>
-    <DataTemplate DataType="models:TimeLog">
-      <Border Background="White"
+    <DataTemplate DataType="models:TLTimeLogItem">
+      <Border Background="{Binding Color}"
               CornerRadius="8"
               Padding="4"
               Margin="16,12,0,0"
               BorderBrush="#E5E7EB"
               BorderThickness="1">
         <StackPanel Orientation="Horizontal" Spacing="16">
-          <TextBlock Text="{Binding Task.Name}" />
-          <TextBlock Text="{Binding TimeSpent}" />
+          <TextBlock Text="{Binding EmployeeName, StringFormat=Assigned: {0}}" />
+          <TextBlock Text="{Binding TimeLog.Date, StringFormat=Date: {0:dd/MM/yyyy}}" />
+          <TextBlock Text="{Binding TimeLog.TimeSpent, StringFormat=Time Spent: {0}}" />
         </StackPanel>
       </Border>
     </DataTemplate>
