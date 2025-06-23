@@ -27,7 +27,6 @@ public partial class MainWindowViewModel : ViewModelBase
     public BoardViewModel? BoardView { get; private set; }
     public ProjectsViewModel? ProjectsView { get; private set; }
     public TasksViewModel? TasksView { get; private set; }
-    public TimeLogsViewModel? TimeLogsView { get; private set; }
     public ReportsViewModel? ReportsView { get; private set; }
 
     public int CurrentUserId { get; private set; }
@@ -78,8 +77,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void ShowTimeLogs()
     {
-        TimeLogsView ??= new TimeLogsViewModel(this);
-        CurrentPage = TimeLogsView;
+        CurrentPage = new TimeLogsViewModel(this);
     }
 
     [RelayCommand]
