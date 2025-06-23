@@ -1,5 +1,8 @@
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using GetStartedApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GetStartedApp.ViewModels;
 
@@ -9,14 +12,13 @@ public class TimeLogsViewModel : ViewModelBase
     {
         Main = main;
 
-        Logs = new ObservableCollection<TimeLogItem>
-        {
-            new() { TaskName = "Fix login bug", Duration = "45m", Date = "2025-05-20", User = "Alice" },
-            new() { TaskName = "Design onboarding", Duration = "1h 30m", Date = "2025-05-21", User = "Bob" }
-        };
+        using var context = new TimeTrackingContext();
+
+        var projects = (from p in context.Projects.Include(p => p.Tasks).ThenInclude(task => task.TimeLogs) select p);
+        ProjectItems = new ObservableCollection<Project>(projects);
     }
 
     public MainWindowViewModel Main { get; }
 
-    public ObservableCollection<TimeLogItem> Logs { get; set; }
+    public ObservableCollection<Project> ProjectItems { get; set; }
 }

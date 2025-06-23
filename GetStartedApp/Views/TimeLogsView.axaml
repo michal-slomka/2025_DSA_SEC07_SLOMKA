@@ -1,6 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:GetStartedApp.ViewModels"
+             xmlns:models="using:GetStartedApp.Models"
              x:Class="GetStartedApp.Views.TimeLogsView"
              xmlns:views="clr-namespace:GetStartedApp.Views"
              x:DataType="vm:TimeLogsViewModel"
@@ -15,6 +16,59 @@
     <StackPanel Margin="24" Spacing="16">
       <TextBlock Text="⏱ Time Logs" FontSize="28" FontWeight="Bold" Foreground="#111827" />
       <TextBlock Text="This is the Time Logs view" FontSize="16" Foreground="#374151" />
+      <ScrollViewer Height="700">
+        <ItemsControl ItemsSource="{Binding ProjectItems}" />
+      </ScrollViewer>
     </StackPanel>
   </DockPanel>
+
+  <UserControl.DataTemplates>
+    <DataTemplate DataType="models:Project">
+      <!-- <Border Background="IndianRed" Padding="4"> -->
+      <Border Background="White"
+              CornerRadius="8"
+              Padding="4"
+              Margin="0,12,0,0"
+              BorderBrush="#E5E7EB"
+              BorderThickness="1">
+        <Expander Header="{Binding Name}" Width="700" IsExpanded="False" ExpandDirection="Down">
+          <ItemsControl ItemsSource="{Binding Tasks}" />
+        </Expander>
+        <!-- <StackPanel> -->
+        <!--   <TextBlock Text="{Binding Name}" /> -->
+        <!--   <ItemsControl ItemsSource="{Binding Tasks}" /> -->
+        <!-- </StackPanel> -->
+      </Border>
+    </DataTemplate>
+    <DataTemplate DataType="models:Task">
+      <!-- <Border Background="LightSkyBlue" Padding="4"> -->
+      <Border Background="#F3F4F6"
+              CornerRadius="8"
+              Padding="4"
+              Margin="16,12,0,0"
+              BorderBrush="#E5E7EB"
+              BorderThickness="1">
+        <Expander Header="{Binding Name}" IsExpanded="False" ExpandDirection="Down">
+          <ItemsControl ItemsSource="{Binding TimeLogs}" />
+        </Expander>
+        <!-- <StackPanel> -->
+        <!--   <TextBlock Text="{Binding Name}" /> -->
+        <!--   <ItemsControl ItemsSource="{Binding TimeLogs}" /> -->
+        <!-- </StackPanel> -->
+      </Border>
+    </DataTemplate>
+    <DataTemplate DataType="models:TimeLog">
+      <Border Background="White"
+              CornerRadius="8"
+              Padding="4"
+              Margin="16,12,0,0"
+              BorderBrush="#E5E7EB"
+              BorderThickness="1">
+        <StackPanel Orientation="Horizontal" Spacing="16">
+          <TextBlock Text="{Binding Task.Name}" />
+          <TextBlock Text="{Binding TimeSpent}" />
+        </StackPanel>
+      </Border>
+    </DataTemplate>
+  </UserControl.DataTemplates>
 </UserControl>
