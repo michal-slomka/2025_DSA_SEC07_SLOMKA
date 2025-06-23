@@ -43,6 +43,12 @@
                   <StackPanel Spacing="8">
                     <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16" Foreground="#111827" />
                     <TextBlock Text="{Binding Description}" TextWrapping="Wrap" FontSize="13" Foreground="#374151" />
+                    <TextBlock
+                      Text="{Binding ParentTask.Name, StringFormat=Parent task: {0}}"
+                      FontSize="12"
+                      Foreground="#6366F1"
+                      HorizontalAlignment="Right"
+                      Margin="0,24,0,0"/>
                   </StackPanel>
                 </Border>
 
