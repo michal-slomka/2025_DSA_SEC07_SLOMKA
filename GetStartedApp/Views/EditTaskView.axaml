@@ -81,6 +81,8 @@
         Padding="12,6"
         CornerRadius="4" />
     </StackPanel>
+    <TextBlock Text="{Binding Notification}" Foreground="#10B981" FontWeight="Bold" Margin="0,8,0,0"/>
+    <!--<TextBlock Text="{Binding NotificationError}" Foreground="#EF4444" FontWeight="Bold" Margin="0,8,0,0"/>-->
   </StackPanel>
 
   <UserControl.DataTemplates>

@@ -15,7 +15,8 @@ public partial class EditTaskViewModel : ViewModelBase
     public ObservableCollection<User> AvailableEmployees { get; }
     public ObservableCollection<Project> AvailableProjects { get; }
     [ObservableProperty] private ObservableCollection<Task> _availableParentTasks;
-
+    [ObservableProperty] private string _notification = string.Empty;
+    [ObservableProperty] private string _notificationError = string.Empty;
     public Task? SelectedTask
     {
         get;
@@ -75,7 +76,14 @@ public partial class EditTaskViewModel : ViewModelBase
         }
 
         using var context = new TimeTrackingContext();
-
+        
+        if (string.IsNullOrWhiteSpace(NewName))
+        {
+            NotificationError = "Required input is empty!";
+            Console.WriteLine($"The task must have a name/description");
+            return;
+        }
+        
         if (NewEmployee is null || NewProject is null)
         {
             Console.WriteLine($"The task must have an employee and project assigned");
@@ -95,7 +103,7 @@ public partial class EditTaskViewModel : ViewModelBase
 
         context.Tasks.Update(task);
         context.SaveChanges();
-
+        Notification = "Task edited successfully!"; 
         // _main.ShowTasks();
     }
 

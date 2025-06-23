@@ -11,7 +11,7 @@ public partial class EditProjectViewModel : ViewModelBase
 {
     public ObservableCollection<Project> AvailableProjects { get; }
     public ObservableCollection<User> AvailableManagers { get; }
-
+    [ObservableProperty] private string _notification = string.Empty;
     public Project? SelectedProject
     {
         get;
@@ -51,6 +51,12 @@ public partial class EditProjectViewModel : ViewModelBase
             return;
         }
 
+         if (string.IsNullOrWhiteSpace(NewName))
+        {
+           Console.WriteLine($"The project must have a name/description");
+            return;
+        }
+
         if (SelectedManager is null)
         {
             Console.WriteLine("No manager selected");
@@ -67,7 +73,7 @@ public partial class EditProjectViewModel : ViewModelBase
 
         context.Projects.Update(project);
         context.SaveChanges();
-
+        Notification = "Project edited successfully!"; 
         // _main.ShowProjects();
     }
 
