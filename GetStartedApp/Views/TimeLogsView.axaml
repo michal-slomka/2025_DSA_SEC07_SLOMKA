@@ -1,7 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:GetStartedApp.ViewModels"
-             xmlns:models="using:GetStartedApp.Models"
+             xmlns:models="using:GetStartedApp.Models.TimeLogItems"
              x:Class="GetStartedApp.Views.TimeLogsView"
              xmlns:views="clr-namespace:GetStartedApp.Views"
              x:DataType="vm:TimeLogsViewModel"
@@ -23,7 +23,7 @@
   </DockPanel>
 
   <UserControl.DataTemplates>
-    <DataTemplate DataType="models:TLProjectItem">
+    <DataTemplate DataType="models:ProjectItem">
       <Border Background="White"
               CornerRadius="8"
               Padding="4"
@@ -35,7 +35,7 @@
         </Expander>
       </Border>
     </DataTemplate>
-    <DataTemplate DataType="models:TLTaskItem">
+    <DataTemplate DataType="models:TaskItem">
       <Border Background="#F3F4F6"
               CornerRadius="8"
               Padding="4"
@@ -47,7 +47,7 @@
         </Expander>
       </Border>
     </DataTemplate>
-    <DataTemplate DataType="models:TLTimeLogItem">
+    <DataTemplate DataType="models:TimeLogItem">
       <Border Background="{Binding Color}"
               CornerRadius="8"
               Padding="4"

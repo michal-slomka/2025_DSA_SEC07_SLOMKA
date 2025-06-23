@@ -1,22 +1,22 @@
 using System.Collections.Generic;
 
-namespace GetStartedApp.Models;
+namespace GetStartedApp.Models.TimeLogItems;
 
-public class TLTimeLogItem
+public class TimeLogItem
 {
     public required TimeLog TimeLog { get; init; }
     public required string EmployeeName { get; init; }
     public required string Color { get; init; }
 }
 
-public class TLTaskItem
+public class TaskItem
 {
     public required Task Task { get; init; }
-    public required List<TLTimeLogItem> TimeLogItems { get; set; }
+    public required List<TimeLogItem> TimeLogItems { get; set; }
 }
 
-public class TLProjectItem
+public class ProjectItem
 {
     public required Project Project { get; init; }
-    public required List<TLTaskItem> TaskItems { get; set; }
+    public required List<TaskItem> TaskItems { get; set; }
 }

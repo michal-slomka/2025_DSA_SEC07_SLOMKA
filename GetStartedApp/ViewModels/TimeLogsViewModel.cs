@@ -4,6 +4,9 @@ using System.Linq;
 using Avalonia.Media;
 using GetStartedApp.Models;
 using Microsoft.EntityFrameworkCore;
+using ProjectItem = GetStartedApp.Models.TimeLogItems.ProjectItem;
+using TaskItem = GetStartedApp.Models.TimeLogItems.TaskItem;
+using TimeLogItem = GetStartedApp.Models.TimeLogItems.TimeLogItem;
 
 namespace GetStartedApp.ViewModels;
 
@@ -21,13 +24,13 @@ public class TimeLogsViewModel : ViewModelBase
                 .Include(p => p.Tasks)
                 .ThenInclude(task => task.AssignedEmployee)
             select p;
-        var projectItems = projects.Select(project => new TLProjectItem
+        var projectItems = projects.Select(project => new ProjectItem
         {
             Project = project,
-            TaskItems = project.Tasks.Select(task => new TLTaskItem
+            TaskItems = project.Tasks.Select(task => new TaskItem
             {
                 Task = task,
-                TimeLogItems = task.TimeLogs.Select(timeLog => new TLTimeLogItem
+                TimeLogItems = task.TimeLogs.Select(timeLog => new TimeLogItem
                 {
                     TimeLog = timeLog,
                     EmployeeName = task.AssignedEmployee.Name,
@@ -38,10 +41,10 @@ public class TimeLogsViewModel : ViewModelBase
             }).ToList(),
         });
 
-        ProjectItems = new ObservableCollection<TLProjectItem>(projectItems);
+        ProjectItems = new ObservableCollection<ProjectItem>(projectItems);
     }
 
     public MainWindowViewModel Main { get; }
 
-    public ObservableCollection<TLProjectItem> ProjectItems { get; set; }
+    public ObservableCollection<ProjectItem> ProjectItems { get; set; }
 }
