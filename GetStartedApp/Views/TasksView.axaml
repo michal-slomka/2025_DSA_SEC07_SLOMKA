@@ -18,19 +18,12 @@
         <Button
           Content="Create Task"
           Command="{Binding ShowCreateTaskViewCommand}"
-          Background="#3B82F6"
-          Foreground="White"
-          Padding="8,4"
-          CornerRadius="4" />
+          Padding="8,4" />
         <Button Content="Edit" Command="{Binding EditTaskCommand}" />
         <Button Content="Log time"
                 Command="{Binding ShowLogTimeViewCommand}"
-                Background="#60A5FA"
-                Foreground="White"
-                FontWeight="Bold"
                 HorizontalAlignment="Right"
-                Padding="8,4"
-                CornerRadius="4" />
+                Padding="8,4" />
       </StackPanel>
 
       <ScrollViewer VerticalScrollBarVisibility="Auto" Height="700">
@@ -48,23 +41,20 @@
                       FontSize="12"
                       Foreground="#6366F1"
                       HorizontalAlignment="Right"
-                      Margin="0,24,0,0"/>
+                      Margin="0,24,0,0" />
                   </StackPanel>
                 </Border>
 
                 <Border Background="#F3F4F6" CornerRadius="8" Padding="16" Width="220" BorderBrush="#E5E7EB"
                         BorderThickness="1">
                   <StackPanel Spacing="8">
-                    <TextBlock Text="Status: TO DO" FontSize="12" Foreground="#6B7280" />
-                    <TextBlock Text="Time spent: {Binding TimeSpent}" FontSize="12" Foreground="#6B7280" />
-                    <TextBlock Text="{Binding EndTime, StringFormat=Deadline: {0:dd/MM/yyyy}}" FontSize="12"
+                    <TextBlock Text="{Binding AssignedEmployee.Name, StringFormat=Assigned: {0}}" FontSize="12"
                                Foreground="#6B7280" />
-                    <StackPanel Orientation="Horizontal" Spacing="6">
-                      <TextBlock Text="Assigned to:" FontSize="12" Foreground="#6B7280" />
-                      
-                      <TextBlock Text="{Binding AssignedEmployee.Name}" FontSize="12" Foreground="#111827" />
-                    </StackPanel>
-
+                    <TextBlock Text="{Binding Type, StringFormat=Type: {0}}" FontSize="12" Foreground="#6B7280" />
+                    <TextBlock Text="{Binding StartTime, StringFormat=Start: {0:dd/MM/yyyy}}" FontSize="12"
+                               Foreground="#6B7280" />
+                    <TextBlock Text="{Binding EndTime, StringFormat=End: {0:dd/MM/yyyy}}" FontSize="12"
+                               Foreground="#6B7280" />
                   </StackPanel>
                 </Border>
               </DockPanel>
