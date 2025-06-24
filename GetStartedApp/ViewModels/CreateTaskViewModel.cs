@@ -61,7 +61,7 @@ public partial class CreateTaskViewModel : ViewModelBase
             Description = Description.Trim(),
             AssignedEmployeeId = SelectedEmployee.EmployeeId,
             ProjectId = SelectedProject.ProjectId,
-            ParentTaskId = (SelectedParentTask != null && SelectedParentTask.TaskId != -1) ? SelectedParentTask.ProjectId : null,
+            ParentTaskId = (SelectedParentTask != null && SelectedParentTask.TaskId != -1) ? SelectedParentTask.TaskId : null,
             StartTime = StartTime?.DateTime ?? DateTime.Now,
             EndTime = EndTime?.DateTime,
             Type = Type ?? ""
