@@ -11,12 +11,9 @@
     <!-- Main Content -->
     <StackPanel Margin="24" Spacing="16">
       <StackPanel Orientation="Horizontal" Spacing="16">
-        <TextBlock Text="📊 Reports" FontSize="28" FontWeight="Bold" Foreground="#111827" />
-        <Button Content="➕ Create Report"
-                Background="#3B82F6"
-                Foreground="White"
+        <TextBlock Text="Reports" FontSize="28" FontWeight="Bold" Foreground="#111827" />
+        <Button Content="Create Report"
                 Padding="8,4"
-                CornerRadius="4"
                 Command="{Binding OpenCreateReportCommand}" />
       </StackPanel>
       <TextBlock Text="This is the Reports view" FontSize="16" Foreground="#374151" />
