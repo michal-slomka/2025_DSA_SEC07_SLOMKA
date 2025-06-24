@@ -14,7 +14,8 @@
         <TextBlock Text="Reports" FontSize="28" FontWeight="Bold" Foreground="#111827" />
         <Button Content="Create Report"
                 Padding="8,4"
-                Command="{Binding OpenCreateReportCommand}" />
+                Command="{Binding OpenCreateReportCommand}"
+                IsVisible="{Binding Main.CurrentUserType, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter='employee'}" />
       </StackPanel>
       <TextBlock Text="This is the Reports view" FontSize="16" Foreground="#374151" />
 

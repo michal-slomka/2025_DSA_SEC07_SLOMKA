@@ -18,10 +18,12 @@
         <Button
           Content="Create Task"
           Command="{Binding ShowCreateTaskViewCommand}"
-          Padding="8,4" />
+          Padding="8,4"
+          IsVisible="{Binding Main.CurrentUserType, Converter={x:Static ObjectConverters.Equal}, ConverterParameter='admin'}" />
         <Button Content="Edit" Command="{Binding EditTaskCommand}" />
         <Button Content="Log time"
                 Command="{Binding ShowLogTimeViewCommand}"
+                IsVisible="{Binding Main.CurrentUserType, Converter={x:Static ObjectConverters.Equal}, ConverterParameter='employee'}"
                 HorizontalAlignment="Right"
                 Padding="8,4" />
       </StackPanel>

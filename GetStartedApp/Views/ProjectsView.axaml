@@ -24,7 +24,8 @@
         <Button Name="FilterButton" Content="Filter" Command="{Binding FilterProjectsCommand}" />
         <Button Content="Create Project"
                 Padding="8,4"
-                Command="{Binding OpenCreateProjectCommand}" />
+                Command="{Binding OpenCreateProjectCommand}"
+                IsVisible="{Binding Main.CurrentUserType, Converter={x:Static ObjectConverters.Equal}, ConverterParameter='admin'}" />
         <Button Content="Edit" Command="{Binding EditProjectCommand}" />
       </StackPanel>
 

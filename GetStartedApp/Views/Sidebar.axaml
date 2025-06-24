@@ -9,7 +9,8 @@
     <Button Content="📝 Tasks" Background="Transparent" Foreground="#1F2937" Command="{Binding ShowTasksCommand}" />
     <Button Content="⏱ Time Logs" Background="Transparent" Foreground="#1F2937" Command="{Binding ShowTimeLogsCommand}" />
     <Button Content="📊 Reports" Background="Transparent" Foreground="#1F2937" Command="{Binding ShowReportsCommand}" />
-    <Button Content="🙂 New User" Background="Transparent" Foreground="#1F2937" Command="{Binding ShowNewUserCommand}" />
+    <Button Content="🙂 New User" Background="Transparent" Foreground="#1F2937" Command="{Binding ShowNewUserCommand}"
+            IsVisible="{Binding CurrentUserType, Converter={x:Static ObjectConverters.Equal}, ConverterParameter='admin'}" />
     <Button Content="← Log Out" Background="Transparent" Foreground="#EF4444" HorizontalAlignment="Left"
             Command="{Binding LogOutCommand}" Margin="0,40,0,0" />
   </StackPanel>

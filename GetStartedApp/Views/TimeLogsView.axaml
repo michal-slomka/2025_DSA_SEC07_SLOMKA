@@ -14,7 +14,8 @@
     <StackPanel Margin="24" Spacing="16">
       <StackPanel Orientation="Horizontal" Spacing="16">
         <TextBlock Text="Time Logs" FontSize="28" FontWeight="Bold" Foreground="#111827" />
-        <Button Content="Approve" Command="{Binding ApproveTimeLogCommand}" />
+        <Button Content="Approve" Command="{Binding ApproveTimeLogCommand}"
+                IsVisible="{Binding Main.CurrentUserType, Converter={x:Static ObjectConverters.Equal}, ConverterParameter='project_manager'}" />
       </StackPanel>
       <ScrollViewer Height="700">
         <ItemsControl ItemsSource="{Binding ProjectItems}" />
