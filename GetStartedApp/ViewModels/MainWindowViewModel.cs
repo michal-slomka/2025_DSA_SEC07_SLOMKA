@@ -24,7 +24,6 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [ObservableProperty] private ViewModelBase _currentPage;
 
-    public BoardViewModel? BoardView { get; private set; }
     public ProjectsViewModel? ProjectsView { get; private set; }
     public TasksViewModel? TasksView { get; private set; }
     public ReportsViewModel? ReportsView { get; private set; }
@@ -49,13 +48,6 @@ public partial class MainWindowViewModel : ViewModelBase
         CurrentPage = _loginView;
         ProjectsView?.Reset();
         TasksView?.Reset();
-    }
-
-    [RelayCommand]
-    private void ShowBoard()
-    {
-        BoardView ??= new BoardViewModel(this);
-        CurrentPage = BoardView;
     }
 
     [RelayCommand]
