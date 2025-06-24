@@ -43,9 +43,9 @@ public partial class CreateTaskViewModel : ViewModelBase
     [RelayCommand]
     private void Save()
     {
-        if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Description))
+        if (string.IsNullOrWhiteSpace(Name))
         {
-            Console.WriteLine("Name and description cannot be empty");
+            Console.WriteLine("Name cannot be empty");
             return;
         }
 
