@@ -39,7 +39,7 @@ public partial class MainWindowViewModel : ViewModelBase
         CurrentUserId = userId;
         CurrentUserType = type;
 
-        ShowBoard();
+        ShowProjects();
     }
 
     // Navigation methods
