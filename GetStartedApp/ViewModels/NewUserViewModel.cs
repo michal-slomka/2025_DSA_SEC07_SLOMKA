@@ -7,6 +7,15 @@ namespace GetStartedApp.ViewModels;
 
 public partial class NewUserViewModel : ViewModelBase
 {
+    public NewUserViewModel(MainWindowViewModel main)
+    {
+        Main = main;
+    }
+
+    public string[] UserTypes { get; } = ["employee", "project_manager", "admin"];
+
+    public MainWindowViewModel Main { get; }
+
     public string Username
     {
         get;
@@ -32,9 +41,9 @@ public partial class NewUserViewModel : ViewModelBase
 
         var newUser = new User
         {
-            Name = $"{Username}",
-            Password = $"{Password}",
-            Type = "admin"
+            Name = Username,
+            Password = Password,
+            Type = UserType
         };
 
         var userWithSameName = context.Users.SingleOrDefault(u => u.Name == newUser.Name);
@@ -47,7 +56,12 @@ public partial class NewUserViewModel : ViewModelBase
 
         context.Users.Add(newUser);
         context.SaveChanges();
+    }
 
-        Console.WriteLine($"User registered");
+    [RelayCommand]
+    private void Cancel()
+    {
+        Username = string.Empty;
+        Password = string.Empty;
     }
 }

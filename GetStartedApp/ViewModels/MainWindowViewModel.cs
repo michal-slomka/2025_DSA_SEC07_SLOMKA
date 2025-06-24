@@ -78,4 +78,10 @@ public partial class MainWindowViewModel : ViewModelBase
         ReportsView ??= new ReportsViewModel(this);
         CurrentPage = ReportsView;
     }
+    
+    [RelayCommand]
+    private void ShowNewUser()
+    {
+        CurrentPage = new NewUserViewModel(this);
+    }
 }

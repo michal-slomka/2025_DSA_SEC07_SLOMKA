@@ -43,6 +43,9 @@
     <DataTemplate DataType="vm:ApproveTimeLogViewModel">
       <views:ApproveTimeLogView />
     </DataTemplate>
+    <DataTemplate DataType="vm:NewUserViewModel">
+      <views:NewUserView />
+    </DataTemplate>
   </Application.DataTemplates>
 
   <!-- 🎨 Global styling -->
