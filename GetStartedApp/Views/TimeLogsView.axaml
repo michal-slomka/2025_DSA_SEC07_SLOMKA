@@ -10,12 +10,12 @@
   <DockPanel>
     <!-- Sidebar -->
     <views:Sidebar DockPanel.Dock="Left" DataContext="{Binding Main}" Width="200" />
-
-
     <!-- Main Content -->
     <StackPanel Margin="24" Spacing="16">
-      <TextBlock Text="⏱ Time Logs" FontSize="28" FontWeight="Bold" Foreground="#111827" />
-      <TextBlock Text="This is the Time Logs view" FontSize="16" Foreground="#374151" />
+      <StackPanel Orientation="Horizontal" Spacing="16">
+        <TextBlock Text="⏱ Time Logs" FontSize="28" FontWeight="Bold" Foreground="#111827" />
+        <Button Content="Approve" Command="{Binding ApproveTimeLogCommand}" />
+      </StackPanel>
       <ScrollViewer Height="700">
         <ItemsControl ItemsSource="{Binding ProjectItems}" />
       </ScrollViewer>

@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Avalonia.Media;
+using CommunityToolkit.Mvvm.Input;
 using GetStartedApp.Models;
 using Microsoft.EntityFrameworkCore;
 using ProjectItem = GetStartedApp.Models.TimeLogItems.ProjectItem;
@@ -10,7 +11,7 @@ using TimeLogItem = GetStartedApp.Models.TimeLogItems.TimeLogItem;
 
 namespace GetStartedApp.ViewModels;
 
-public class TimeLogsViewModel : ViewModelBase
+public partial class TimeLogsViewModel : ViewModelBase
 {
     public TimeLogsViewModel(MainWindowViewModel main)
     {
@@ -47,4 +48,10 @@ public class TimeLogsViewModel : ViewModelBase
     public MainWindowViewModel Main { get; }
 
     public ObservableCollection<ProjectItem> ProjectItems { get; set; }
+
+    [RelayCommand]
+    private void ApproveTimeLog()
+    {
+        Main.CurrentPage = new ApproveTimeLogViewModel(Main);
+    }
 }

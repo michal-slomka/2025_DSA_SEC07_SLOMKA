@@ -75,7 +75,7 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void ShowTimeLogs()
+    public void ShowTimeLogs()
     {
         CurrentPage = new TimeLogsViewModel(this);
     }

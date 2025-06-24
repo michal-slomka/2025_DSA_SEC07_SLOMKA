@@ -43,6 +43,9 @@
     <DataTemplate DataType="vm:CreateReportViewModel">
       <views:CreateReportView />
     </DataTemplate>
+    <DataTemplate DataType="vm:ApproveTimeLogViewModel">
+      <views:ApproveTimeLogView />
+    </DataTemplate>
   </Application.DataTemplates>
 
   <!-- 🎨 Global styling -->

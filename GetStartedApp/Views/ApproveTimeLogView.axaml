@@ -1,0 +1,66 @@
+<UserControl
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:vm="using:GetStartedApp.ViewModels"
+  xmlns:models="using:GetStartedApp.Models"
+  x:Class="GetStartedApp.Views.ApproveTimeLogView"
+  x:DataType="vm:ApproveTimeLogViewModel"
+  Background="#F9FAFB">
+
+  <StackPanel Margin="24" Spacing="16" HorizontalAlignment="Left" Width="400">
+    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+      <TextBlock Text="Task:" VerticalAlignment="Center" />
+      <ComboBox
+        ItemsSource="{Binding AvailableTasks}"
+        SelectedItem="{Binding SelectedTask}"
+        Width="200"
+        PlaceholderText="Select task" />
+    </StackPanel>
+
+    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+      <TextBlock Text="Time Log:" VerticalAlignment="Center" />
+      <ComboBox
+        ItemsSource="{Binding AvailableTimeLogs}"
+        SelectedItem="{Binding SelectedTimeLog}"
+        Width="200"
+        PlaceholderText="Select time log" />
+    </StackPanel>
+
+    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+      <TextBlock Text="Approved:" VerticalAlignment="Center" />
+      <CheckBox IsChecked="{Binding IsApproved}" />
+    </StackPanel>
+
+    <StackPanel
+      Orientation="Horizontal"
+      Spacing="12"
+      Margin="0,20,0,0">
+      <Button
+        Content="Save"
+        Command="{Binding SaveCommand}"
+        Background="#10B981"
+        Foreground="White"
+        Padding="12,6"
+        CornerRadius="4" />
+      <Button
+        Content="Cancel"
+        Command="{Binding CancelCommand}"
+        Background="#E5E7EB"
+        Foreground="#374151"
+        Padding="12,6"
+        CornerRadius="4" />
+    </StackPanel>
+  </StackPanel>
+
+  <UserControl.DataTemplates>
+    <DataTemplate DataType="models:Task">
+      <TextBlock Text="{Binding Name}" />
+    </DataTemplate>
+    <DataTemplate DataType="models:TimeLog">
+      <StackPanel Orientation="Horizontal" Spacing="4">
+        <TextBlock Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}" />
+        <TextBlock Text="{Binding TimeSpent}" />
+      </StackPanel>
+    </DataTemplate>
+  </UserControl.DataTemplates>
+</UserControl>
