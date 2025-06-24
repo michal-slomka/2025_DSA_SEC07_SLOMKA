@@ -36,7 +36,11 @@
                 <Border Background="White" CornerRadius="8" Padding="16" Width="600" Margin="0,0,16,0"
                         BorderBrush="#E5E7EB" BorderThickness="1">
                   <StackPanel Spacing="8">
-                    <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16" Foreground="#111827" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                      <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16" Foreground="#111827" />
+                      <TextBlock Text="{Binding Project.Name}" TextWrapping="Wrap"
+                                 FontSize="16" Foreground="#AA6B7280" />
+                    </StackPanel>
                     <TextBlock Text="{Binding Description}" TextWrapping="Wrap" FontSize="13" Foreground="#374151" />
                     <TextBlock
                       Text="{Binding ParentTask.Name, StringFormat=Parent task: {0}}"
